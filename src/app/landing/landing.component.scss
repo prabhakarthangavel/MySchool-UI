@@ -1,0 +1,40 @@
+.example-header-image {
+    // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    // background-size: cover;
+}
+
+.flexbox-container{
+    display: flex;
+    justify-content: center;
+}
+
+.flexbox-item{
+    width: 50%;
+    margin: 2% 2% 0 2%;
+    min-height: 100px; 
+    
+}
+
+.image{
+    margin-bottom: -30px;
+    border-radius: 100% !important;
+    padding: 5%;
+    margin-bottom: 0px;
+    border-radius: 100% !important;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+         box-shadow: 0 8px 6px -6px black;
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+h2,h3{
+    margin: 8px;
+}
+
+.radius{
+    margin-bottom: -23px;
+    border-radius: 100%;
+}
