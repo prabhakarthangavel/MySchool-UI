@@ -10,6 +10,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { CardsComponent } from './cards/cards.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CardsComponent } from './cards/cards.component';
     NavBarComponent,
     LandingComponent,
     LoginComponent,
-    CardsComponent
+    CardsComponent,
+    AttendanceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-cards',
@@ -6,13 +6,18 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./cards.component.scss']
 })
 export class CardsComponent implements OnInit {
-  @Input('image')image:String;
-  
+  @Input('image')image:string;
+  @Output('card') card = new EventEmitter<string>();
+
   constructor() { 
 
   }
 
   ngOnInit() {
+  }
+
+  cardClicked(value:string){
+    this.card.emit(value);
   }
 
 }

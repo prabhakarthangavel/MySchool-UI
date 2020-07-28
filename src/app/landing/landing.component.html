@@ -13,7 +13,7 @@
 
 <div class="flexbox-container">
     <div class="flexbox-item">
-        <app-cards image="attendance"></app-cards>
+        <app-cards image="attendance" (card)="clickHandle($event)"></app-cards>
     </div>
     <div class="flexbox-item">
         <app-cards image="assignments"></app-cards>

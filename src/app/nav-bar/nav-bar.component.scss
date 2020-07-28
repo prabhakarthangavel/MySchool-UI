@@ -8,10 +8,28 @@
   padding: 10%;
 }
 
-// #container {
-//   top: 64px !important;
-//  }
- 
+mat-toolbar{
+  padding: 5px;
+}
+
+.container {
+  position: relative;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  min-width: 100%;
+}
+
+.fullWidth {
+  min-width: 50%;
+}
+
+.none{
+  color: black;
+  background: whitesmoke;
+}
 //  @media(max-width: 599px) {
 //    #container {
 //      top: 56px !important;
