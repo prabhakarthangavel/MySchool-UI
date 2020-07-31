@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { NavBarService } from './nav-bar.service';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -20,14 +21,14 @@ export class NavBarComponent implements OnInit, OnDestroy, AfterContentChecked {
   }
 
   ngOnInit() {
-    
+
   }
 
   ngAfterContentChecked() {
     this.ref.detectChanges();
   }
 
-  backClicked(){
+  backClicked() {
     this._location.back();
   }
 

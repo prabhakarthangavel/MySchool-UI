@@ -1,20 +1,47 @@
 <div class="margin">
-  <form>
+  <form [formGroup]="studentForm">
     <mat-form-field appearance="outline">
       <mat-label>Student ID</mat-label>
-      <input matInput placeholder="Enter Student ID">
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID">
     </mat-form-field>
+    <div class="errors" *ngIf="studentId.touched && studentId.invalid">
+      <div *ngIf="studentId.errors.required">Student ID Required</div>
+    </div>
     <mat-form-field appearance="outline">
       <mat-label>Month</mat-label>
-      <input matInput placeholder="Select Month">
+      <mat-select  formControlName="month" id="month">
+        <mat-option *ngFor="let months of allMonths" [value]="months.month">
+          {{months.month}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+    <div class="errors" *ngIf="month.touched && month.invalid">
+      <div *ngIf="month.errors.required">Month Required</div>
+    </div>
     <mat-form-field appearance="outline">
       <mat-label>Working Days</mat-label>
-      <input matInput placeholder="Enter No. of Working Days">
+      <input type="text" formControlName="working_days" id="working_days" matInput placeholder="Enter No. of Working Days">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <div class="errors" *ngIf="working_days.touched && working_days.invalid">
+      <div *ngIf="working_days.errors.required">Working Days Required</div>
+      <div *ngIf="working_days.errors.min">Value Should Be Mininum 1</div>
+      <div *ngIf="working_days.errors.max">Value Should Be Maximum 31</div>
+      <div *ngIf="working_days.errors.pattern">Enter Only Numbers</div> 
+    </div>
+    <mat-form-field appearance="outline"> 
       <mat-label>Present Days</mat-label>
-      <input matInput placeholder="Enter No. of Present Days">
+      <input type="text" formControlName="present_days" id="present_days" matInput placeholder="Enter No. of Present Days">
     </mat-form-field>
+    <div class="errors" *ngIf="present">Present Days Should not Be Greater Than Working Days</div>
+    <div class="errors" *ngIf="present_days.touched && present_days.invalid">
+      <div *ngIf="present_days.errors.required">Working Days Required</div>
+      <div *ngIf="present_days.errors.min">Value Should Be Mininum 1</div>
+      <div *ngIf="present_days.errors.max">Value Should Be Maximum 31</div>
+      <div *ngIf="present_days.errors.pattern">Enter Only Numbers</div> 
+    </div>
   </form>
 </div>
+
+<app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
+
+<!-- <mat-spinner *ngIf="!responseGot"></mat-spinner> -->

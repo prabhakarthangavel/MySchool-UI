@@ -12,17 +12,18 @@
     width: 50%;
     margin: 2% 2% 0 2%;
     min-height: 100px; 
-    
 }
 
 .image{
+    margin-top: -0px;
     margin-bottom: -30px;
     border-radius: 100% !important;
     padding: 5%;
     margin-bottom: 0px;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-         box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 30px 40px -20px ;
+    // -webkit-box-shadow: 0 8px 6px -6px black;
+    // -moz-box-shadow: 0 8px 6px -6px black;
+    //      box-shadow: 0 8px 6px -6px black;
     display: block;
     position: relative;
     padding: 16px;
@@ -31,6 +32,10 @@
 
 h2,h3{
     margin: 8px;
+}
+
+.height{
+    max-height: 50%!important;
 }
 
 .radius{

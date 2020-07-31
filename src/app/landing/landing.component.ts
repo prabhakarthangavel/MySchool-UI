@@ -26,7 +26,7 @@ export class LandingComponent implements OnInit {
   }
 
   clickHandle(page) {
-    this._router.navigate(['/attendance']);
+    this._router.navigate(['/',page]);
   }
 
 }

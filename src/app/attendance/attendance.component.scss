@@ -5,3 +5,21 @@
 mat-form-field{
     width: 100%;
 }
+
+.errors{
+    margin: -5% 0 2% 0;
+    color: red;
+}
+
+.alert-danger {
+    background-color: #f44336; /* Red */
+}
+.alert-success {
+    background-color: #36f456;  
+} 
+.alert{
+    padding: 20px;
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+}

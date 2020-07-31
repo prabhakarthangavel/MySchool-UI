@@ -1,4 +1,4 @@
-<div >
+<div>
   <mat-toolbar color="primary">
     <button mat-icon-button>
       <mat-icon *ngIf="_navBar.navFlag" (click)="snav.toggle()">menu</mat-icon>
@@ -17,15 +17,12 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="container">
-      
+
       <router-outlet></router-outlet>
-      <div class="footer">
-              <button mat-flat-button class="none fullWidth">Cancel</button>
-              <button mat-flat-button color="primary" class="fullWidth">Submit</button>
-      </div>
+
     </mat-sidenav-content>
 
   </mat-sidenav-container>
 
-  
+
 </div>

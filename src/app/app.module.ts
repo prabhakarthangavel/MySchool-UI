@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,8 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { CardsComponent } from './cards/cards.component';
 import { AttendanceComponent } from './attendance/attendance.component';
+import { FooterComponent } from './footer/footer.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +23,18 @@ import { AttendanceComponent } from './attendance/attendance.component';
     LandingComponent,
     LoginComponent,
     CardsComponent,
-    AttendanceComponent
+    AttendanceComponent,
+    FooterComponent,
+    AssignmentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppMaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
