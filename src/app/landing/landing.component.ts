@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit {
   constructor(private _landingService: LandingService, private _router: Router,
     private _navBar: NavBarService) { 
       this._navBar.setShow();
-      this._navBar.title = "My School";
+      this._navBar.title = "St Joseph School";
     }
 
   ngOnInit() {

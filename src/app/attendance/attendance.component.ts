@@ -3,6 +3,7 @@ import { NavBarService } from '../nav-bar/nav-bar.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-attendance',
@@ -10,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
+  public subscription: Subscription;
   public totalDays: number;
   public present: boolean;
   public responseGot: boolean;
@@ -45,7 +47,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   submit() {
-    console.log("form", this.studentForm.value.month, this.studentForm.value.working_days);
+    this.responseGot = true;
     if (this.studentForm.value.present_days > this.studentForm.value.working_days) {
       this.present = true;
     } else {
@@ -56,17 +58,20 @@ export class AttendanceComponent implements OnInit {
         present: this.studentForm.value.present_days,
         year: new Date().getFullYear()
       }
-      this._service.setAttendance(attendanceData).subscribe(
+      this.subscription = this._service.setAttendance(attendanceData).subscribe(
         response => {
-          this.responseGot = true;
-          if(response.status == 200 && response.body.status){
+          this.responseGot = false;
+          if (response.status == 200 && response.body.status) {
             this._snackBar.open(response.body.status, "Close", {
               duration: 5000,
               verticalPosition: 'bottom'
             });
           }
-          console.log(response);
         })
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

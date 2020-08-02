@@ -85,7 +85,7 @@ ext {
         cdvReleaseSigningPropertiesFile = null
     }
     // .properties files to use for 
-     signing.
+     //signing.
     if (!project.hasProperty('cdvDebugSigningPropertiesFile')) {
         cdvDebugSigningPropertiesFile = null
     }

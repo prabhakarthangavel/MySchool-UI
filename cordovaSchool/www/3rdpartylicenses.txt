@@ -325,19 +325,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/material/toolbar
-
-@angular/material/icon
+@angular/material/card
 
 @angular/animations
 MIT
 
-@angular/material/sidenav
+@angular/material/core
 
 @angular/forms
 MIT
 
-@angular/material/core
+@angular/material/form-field
+
+@angular/material/select
+
+@angular/material/button
+
+@angular/material/snack-bar
+
+@angular/material/icon
+
+@angular/material/toolbar
+
+@angular/material/sidenav
 
 @angular/material/list
 

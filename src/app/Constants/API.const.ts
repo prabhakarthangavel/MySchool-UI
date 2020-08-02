@@ -1,4 +1,7 @@
 export const API = {
     welcome: "https://firstschoolapp.herokuapp.com/welcome",
-    SET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/setAttandance"
+    SET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/setAttandance",
+    GET_CLASSES: "https://firstschoolapp.herokuapp.com/getClasses",
+    GET_SECTION: "https://firstschoolapp.herokuapp.com/getSection",
+    SET_ASSIGNMENT: "https://firstschoolapp.herokuapp.com/setAssignments"
 }
