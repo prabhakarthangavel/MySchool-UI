@@ -1,0 +1,53 @@
+<div class="margin">
+  <form [formGroup]="messageForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Message To</mat-label>
+      <mat-select formControlName="messageTo" id="messageTo" (selectionChange)="messageSelect($event.value)">
+        <mat-option *ngFor="let type of messageTypes" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="errors" *ngIf="messageTo.touched && messageTo.invalid">
+      <div *ngIf="messageTo.errors.required">Student ID is Required</div>
+    </div>
+
+    <mat-form-field appearance="outline" *ngIf="msgStudent">
+      <mat-label>Student ID</mat-label>
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID">
+    </mat-form-field>
+    <div class="errors" *ngIf="msgStudent">
+      <div *ngIf="required">Student ID is Required</div>
+    </div>
+
+    <mat-form-field appearance="outline" *ngIf="msgClass">
+      <mat-label>Class</mat-label>
+      <mat-select formControlName="class" id="class">
+        <mat-option *ngFor="let classes of allClass" [value]="classes">
+          {{classes}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="errors" *ngIf="msgClass">
+      <div *ngIf="required">Class is Required</div>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <textarea matInput placeholder="Enter Message" (keypress)="onChange($event)" formControlName="message"
+        rows="10">
+       </textarea>
+    </mat-form-field>
+    <div class="warning">You have entered {{descriptionLength }} of 1000</div>
+    <div class="errors" *ngIf="message.touched && message.invalid">
+      <div *ngIf="message.errors.required">Description is Required</div>
+      <div *ngIf="message.errors.maxlength">Description should not be more than 1000 characters</div>
+    </div>
+
+  </form>
+</div>
+
+<app-footer submit="Submit" cancel="Cancel" [valid]="messageForm.valid" (card)="submit()"></app-footer>
+
+<div class="loading-indicator" *ngIf="responseGot">
+  <mat-spinner></mat-spinner>
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavBarService } from '../nav-bar/nav-bar.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -25,15 +25,15 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   public responseGot: boolean;
   public date: string;
   public dateInvalid: boolean;
-  public descriptionLength = new BehaviorSubject(0);
+  public descriptionLength: number = 0;
   constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) {
     this._navBar.setHide();
     this._navBar.setTitle("Assignments");
-    this.assignmentForm.get('description').valueChanges.subscribe(
-      value => {
-        this.descriptionLength.next(value.length);
-      }
-    )
+    // this.assignmentForm.get('description').valueChanges.subscribe(
+    //   value => {
+    //     this.descriptionLength.next(value.length);
+    //   }
+    // )
   }
 
   ngOnInit() {
@@ -104,6 +104,10 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
           }
         });
     }
+  }
+
+  onChange(event){
+    this.descriptionLength = event.target.value.length + 1;
   }
 
   ngOnDestroy() {

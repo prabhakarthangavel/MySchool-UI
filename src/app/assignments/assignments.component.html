@@ -37,10 +37,11 @@
     </div>
 
     <mat-form-field appearance="outline">
-      <textarea matInput placeholder="Enter Description" formControlName="description" rows="10">
+      <textarea matInput placeholder="Enter Description" (keypress)="onChange($event)" formControlName="description"
+        rows="10">
        </textarea>
     </mat-form-field>
-    <div class="warning">You have entered {{descriptionLength | async}} of 3500</div>
+    <div class="warning">You have entered {{descriptionLength }} of 3500</div>
     <div class="errors" *ngIf="description.touched && description.invalid">
       <div *ngIf="description.errors.required">Description is Required</div>
       <div *ngIf="description.errors.maxlength">Description should not be more than 3500 characters</div>

@@ -15,6 +15,7 @@ import { CardsComponent } from './cards/cards.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { FooterComponent } from './footer/footer.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AssignmentsComponent } from './assignments/assignments.component';
     CardsComponent,
     AttendanceComponent,
     FooterComponent,
-    AssignmentsComponent
+    AssignmentsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -4,12 +4,14 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { MessagesComponent } from './messages/messages.component';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'attendance', component: AttendanceComponent },
   { path: 'assignments', component: AssignmentsComponent },
+  { path: 'messages', component: MessagesComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];
