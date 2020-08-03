@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Response } from '../Constants/Response.const';
 
 @Component({
   selector: 'app-assignments',
@@ -100,7 +101,9 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
               duration: 5000,
               verticalPosition: 'bottom'
             });
-            this.assignmentForm.reset();
+            if(response.body.status == Response.Assignment){
+              this.assignmentForm.reset();
+            }
           }
         });
     }

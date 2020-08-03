@@ -3,5 +3,6 @@ export const API = {
     SET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/setAttandance",
     GET_CLASSES: "https://firstschoolapp.herokuapp.com/getClasses",
     GET_SECTION: "https://firstschoolapp.herokuapp.com/getSection",
-    SET_ASSIGNMENT: "https://firstschoolapp.herokuapp.com/setAssignments"
+    SET_ASSIGNMENT: "https://firstschoolapp.herokuapp.com/setAssignments",
+    SET_MESSAGES: "https://firstschoolapp.herokuapp.com/setMessages"
 }

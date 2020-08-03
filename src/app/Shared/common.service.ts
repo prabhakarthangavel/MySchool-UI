@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { API } from '../Constants/API.const';
 import { MOCK } from '../Constants/MOCK.const';
 import { AllClass } from '../Models/AllClass.interface';
+import { Message } from '../Models/Message.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class CommonService {
 
   setAssignments(assignment): Observable<any> {
     return this._http.post<any>(MOCK.SET_ASSIGNMENT, assignment, { observe: 'response' });
+  }
+
+  setMessages(message: Message): Observable<any> {
+    return this._http.post<any>('http://localhost:8080/setMessages', message, { observe: 'response' });
   }
 }

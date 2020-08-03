@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { Response } from '../Constants/Response.const';
 
 @Component({
   selector: 'app-attendance',
@@ -66,12 +67,17 @@ export class AttendanceComponent implements OnInit {
               duration: 5000,
               verticalPosition: 'bottom'
             });
+            if(response.body.status == Response.Attendence){
+              this.studentForm.reset();
+            }
           }
         })
     }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription && !this.subscription.closed){
+      this.subscription.unsubscribe();
+    }
   }
 }

@@ -332,6 +332,8 @@ MIT
 
 @angular/material/core
 
+@angular/material/progress-spinner
+
 @angular/forms
 MIT
 
@@ -340,6 +342,10 @@ MIT
 @angular/material/select
 
 @angular/material/button
+
+@angular/material/dialog
+
+@angular/material/datepicker
 
 @angular/material/snack-bar
 
