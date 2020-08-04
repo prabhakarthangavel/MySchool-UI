@@ -9,7 +9,7 @@
       </mat-select>
     </mat-form-field>
     <div class="errors" *ngIf="messageTo.touched && messageTo.invalid">
-      <div *ngIf="messageTo.errors.required">Student ID is Required</div>
+      <div *ngIf="messageTo.errors.required">Message To is Required</div>
     </div>
 
     <mat-form-field appearance="outline" *ngIf="msgStudent">
@@ -39,8 +39,8 @@
     </mat-form-field>
     <div class="warning">You have entered {{descriptionLength }} of 1000</div>
     <div class="errors" *ngIf="message.touched && message.invalid">
-      <div *ngIf="message.errors.required">Description is Required</div>
-      <div *ngIf="message.errors.maxlength">Description should not be more than 1000 characters</div>
+      <div *ngIf="message.errors.required">Message is Required</div>
+      <div *ngIf="message.errors.maxlength">Message should not be more than 1000 characters</div>
     </div>
 
   </form>

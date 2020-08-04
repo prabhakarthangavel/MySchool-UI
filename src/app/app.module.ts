@@ -16,6 +16,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { FooterComponent } from './footer/footer.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MessagesComponent } from './messages/messages.component';
+import { PerformanceComponent } from './performance/performance.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MessagesComponent } from './messages/messages.component';
     AttendanceComponent,
     FooterComponent,
     AssignmentsComponent,
-    MessagesComponent
+    MessagesComponent,
+    PerformanceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,38 @@
+<div class="margin">
+  <form [formGroup]="performanceForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Student ID</mat-label>
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID" (keyup)="valueEnter($event.target.value)">
+    </mat-form-field>
+    <div class="errors">
+      <div *ngIf="notFound">Student ID not found in Records</div>
+      <div *ngIf="studentId.touched && studentId.invalid && studentId.errors.required">Student ID is Required</div>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Exam Type</mat-label>
+      <mat-select formControlName="exam" id="exam">
+        <mat-option *ngFor="let exams of examList" [value]="exams">
+          {{exams}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="errors" *ngIf="exam.touched && exam.invalid">
+      <div *ngIf="exam.errors.required">Exam Type is Required</div>
+    </div>
+
+    <div *ngFor="let sub of subList">
+      <mat-form-field appearance="outline">
+        <mat-label>{{sub | titlecase}}</mat-label>
+        <input type="text" formControlName="{{sub}}" id="{{sub}}" matInput placeholder="Enter mark">
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+
+<app-footer submit="Submit" cancel="Cancel" [valid]="performanceForm.valid" (card)="submit()"></app-footer>
+
+<div class="loading-indicator" *ngIf="responseGot">
+  <mat-spinner></mat-spinner>
+</div>

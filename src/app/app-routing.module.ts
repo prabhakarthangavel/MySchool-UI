@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MessagesComponent } from './messages/messages.component';
+import { PerformanceComponent } from './performance/performance.component';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'attendance', component: AttendanceComponent },
   { path: 'assignments', component: AssignmentsComponent },
   { path: 'messages', component: MessagesComponent },
+  { path: 'performance', component: PerformanceComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

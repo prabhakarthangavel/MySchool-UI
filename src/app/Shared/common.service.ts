@@ -30,6 +30,10 @@ export class CommonService {
   }
 
   setMessages(message: Message): Observable<any> {
-    return this._http.post<any>('http://localhost:8080/setMessages', message, { observe: 'response' });
+    return this._http.post<any>(MOCK.SET_MESSAGES, message, { observe: 'response' });
+  }
+
+  getStudents(studentId: number): Observable<any> {
+    return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response'});
   }
 }
