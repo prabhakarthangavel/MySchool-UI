@@ -5,5 +5,6 @@ export const API = {
     GET_SECTION: "https://firstschoolapp.herokuapp.com/getSection",
     SET_ASSIGNMENT: "https://firstschoolapp.herokuapp.com/setAssignments",
     SET_MESSAGES: "https://firstschoolapp.herokuapp.com/setMessages",
-    GET_STUDENTS: "https://firstschoolapp.herokuapp.com/getStudents"
+    GET_STUDENTS: "https://firstschoolapp.herokuapp.com/getStudents",
+    SET_PERFORMANCE: "https://firstschoolapp.herokuapp.com/setPerformance"
 }

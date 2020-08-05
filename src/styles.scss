@@ -30,3 +30,22 @@ body{
     height: 100%;
     background-color: rgba(0,0,0,0.3);
   }
+
+.margin{
+    margin: 3% 3% 0 3%;
+    overflow-y: scroll;         /* SCROLLBARS !!!*/
+    height: calc(100% - 88px);
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.warning{
+    margin: -5% 0 6% 0;
+}
+
+.errors{
+    color: red;
+    margin: -5% 0 2% 0;
+}

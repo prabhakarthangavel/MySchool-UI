@@ -5,6 +5,7 @@ import { API } from '../Constants/API.const';
 import { MOCK } from '../Constants/MOCK.const';
 import { AllClass } from '../Models/AllClass.interface';
 import { Message } from '../Models/Message.interface';
+import { Performance } from '../Models/Performance.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class CommonService {
   }
 
   getStudents(studentId: number): Observable<any> {
-    return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response'});
+    return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response' });
+  }
+
+  setPerformance(performance: Performance): Observable<any> {
+    return this._http.post<any>(MOCK.SET_PERFORMANCE, performance, { observe: 'response' })
   }
 }

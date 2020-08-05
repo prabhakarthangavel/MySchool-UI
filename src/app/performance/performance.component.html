@@ -1,4 +1,4 @@
-<div class="margin">
+<div class="margin" id="body">
   <form [formGroup]="performanceForm">
     <mat-form-field appearance="outline">
       <mat-label>Student ID</mat-label>
@@ -29,9 +29,11 @@
     </div>
 
   </form>
+  <div class="errors" *ngIf="error">Marks Should not be null, non negative, not greater than 100 and should contain
+    only numbers</div>
 </div>
 
-<app-footer submit="Submit" cancel="Cancel" [valid]="performanceForm.valid" (card)="submit()"></app-footer>
+<app-footer id="footer" submit="Submit" cancel="Cancel" [valid]="performanceForm.valid && !notFound && !buttonDisable" (card)="submit()"></app-footer>
 
 <div class="loading-indicator" *ngIf="responseGot">
   <mat-spinner></mat-spinner>

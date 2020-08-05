@@ -4,8 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@ang
 import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Message } from '../Models/Message.interface';
-import { Response } from '../Constants/Response.const';
+import { Performance } from '../Models/Performance.interface';
 
 @Component({
   selector: 'app-performance',
@@ -18,6 +17,8 @@ export class PerformanceComponent implements OnInit {
   public subList = [];
   public searchResult = [];
   public notFound: boolean;
+  public error: boolean;
+  public buttonDisable: boolean;
   public performanceForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
     exam: ['', Validators.required],
@@ -53,9 +54,11 @@ export class PerformanceComponent implements OnInit {
 
   valueEnter(value) {
     this.notFound = false;
+    this.buttonDisable = false;
     if (value.length >= 3) {
       this.subscription = this._service.getStudents(value).subscribe(
         response => {
+          console.log("response", response);
           if (response.status == 200 && response.body.length >= 1) {
             if (response.body.length == 1) {
               let sId = response.body[0].clas;
@@ -65,16 +68,72 @@ export class PerformanceComponent implements OnInit {
                     this.subList = data.body.subjects;
                   }
                 });
+            } else if (response.body.length != 1) {
+              this.buttonDisable = true;
             }
           } else {
             this.notFound = true;
           }
         });
+    } else {
+      this.buttonDisable = true;
     }
   }
 
   submit() {
-    console.log(this.performanceForm.value)
+    this.error = false;
+    let tamil = this.performanceForm.value.tamil;
+    let english = this.performanceForm.value.english;
+    let maths = this.performanceForm.value.math;
+    let social = this.performanceForm.value.social;
+    let science = this.performanceForm.value.science;
+    let physics = this.performanceForm.value.physics;
+    let chemistry = this.performanceForm.value.chemistry;
+    let biology = this.performanceForm.value.biology;
+    let computer = this.performanceForm.value.computer;
+    let subjects: Performance = {
+      student_id: this.performanceForm.value.studentId,
+      exam: this.performanceForm.value.exam.toLowerCase(),
+      tamil: tamil,
+      english: english,
+      maths: maths,
+      social: social,
+      science: science,
+      physics: physics,
+      chemistry: chemistry,
+      biology: biology,
+      computer: computer,
+      year: new Date().getFullYear()
+    }
+    for (let i = 0; i < this.subList.length; i++) {
+      if (this.subList[i] == 'tamil' && (tamil == "" || tamil > 100 || tamil < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'english' && (english == "" || english > 100 || english < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'maths' && (maths == "" || maths > 100 || maths < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'social' && (social == "" || social > 100 || social < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'science' && (science == "" || science > 100 || science < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'physics' && (physics == "" || physics > 100 || physics < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'chemistry' && (chemistry == "" || chemistry > 100 || chemistry < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'biology' && (biology == "" || biology > 100 || biology < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      } else if (this.subList[i] == 'computer' && (computer == "" || computer > 100 || computer < 0 || !/^\d+$/.test(tamil))) {
+        this.error = true;
+      }
+    }
+    if (!this.error) {
+      this.subscription = this._service.setPerformance(subjects).subscribe(
+        response => {
+          if(response.status == 200){
+            console.log("response",response);
+          }
+        });
+    }
   }
 
 }
