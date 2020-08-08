@@ -6,6 +6,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PerformanceComponent } from './performance/performance.component';
+import { HolidayComponent } from './holiday/holiday.component';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'assignments', component: AssignmentsComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'performance', component: PerformanceComponent },
+  { path: 'holiday', component: HolidayComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

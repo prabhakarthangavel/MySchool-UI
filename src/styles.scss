@@ -34,7 +34,7 @@ body{
 .margin{
     margin: 3% 3% 0 3%;
     overflow-y: scroll;         /* SCROLLBARS !!!*/
-    height: calc(100% - 88px);
+    height: calc(100% - 77px);
 }
 
 mat-form-field{
@@ -49,3 +49,7 @@ mat-form-field{
     color: red;
     margin: -5% 0 2% 0;
 }
+
+// mat-sidenav-content{
+//     background-color: whitesmoke;
+// }

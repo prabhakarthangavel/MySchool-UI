@@ -2,14 +2,20 @@
   <form [formGroup]="studentForm">
     <mat-form-field appearance="outline">
       <mat-label>Student ID</mat-label>
-      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID">
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID" (keyup)="valueEnter($event.target.value)"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let result of searchResult" [value]="result">
+          {{result}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <div class="errors" *ngIf="studentId.touched && studentId.invalid">
       <div *ngIf="studentId.errors.required">Student ID Required</div>
     </div>
     <mat-form-field appearance="outline">
       <mat-label>Month</mat-label>
-      <mat-select  formControlName="month" id="month">
+      <mat-select formControlName="month" id="month">
         <mat-option *ngFor="let months of allMonths" [value]="months.month">
           {{months.month}}
         </mat-option>
@@ -26,9 +32,9 @@
       <div *ngIf="working_days.errors.required">Working Days Required</div>
       <div *ngIf="working_days.errors.min">Value Should Be Mininum 1</div>
       <div *ngIf="working_days.errors.max">Value Should Be Maximum 31</div>
-      <div *ngIf="working_days.errors.pattern">Enter Only Numbers</div> 
+      <div *ngIf="working_days.errors.pattern">Enter Only Numbers</div>
     </div>
-    <mat-form-field appearance="outline"> 
+    <mat-form-field appearance="outline">
       <mat-label>Present Days</mat-label>
       <input type="text" formControlName="present_days" id="present_days" matInput placeholder="Enter No. of Present Days">
     </mat-form-field>
@@ -37,13 +43,13 @@
       <div *ngIf="present_days.errors.required">Working Days Required</div>
       <div *ngIf="present_days.errors.min">Value Should Be Mininum 1</div>
       <div *ngIf="present_days.errors.max">Value Should Be Maximum 31</div>
-      <div *ngIf="present_days.errors.pattern">Enter Only Numbers</div> 
+      <div *ngIf="present_days.errors.pattern">Enter Only Numbers</div>
     </div>
   </form>
 </div>
 
 <app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
 
-<div class="loading-indicator" *ngIf="responseGot" >
+<div class="loading-indicator" *ngIf="responseGot">
   <mat-spinner></mat-spinner>
 </div>

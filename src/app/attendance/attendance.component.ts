@@ -16,6 +16,7 @@ export class AttendanceComponent implements OnInit {
   public totalDays: number;
   public present: boolean;
   public responseGot: boolean;
+  public searchResult = [];
   public studentForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
     month: ['', Validators.required],
@@ -47,13 +48,29 @@ export class AttendanceComponent implements OnInit {
     return this.studentForm.get('present_days');
   }
 
+
+  valueEnter(value) {
+    this.searchResult = [];
+    if (value.length >= 3) {
+      this.subscription = this._service.getStudents(value).subscribe(
+        response => {
+          if (response.status == 200 && response.body.length >= 1) {
+            for (let i = 0; i < response.body.length; i++) {
+              this.searchResult.push(response.body[i].student_id + ' - ' + (response.body[i].name as string).toUpperCase());
+            }
+          }
+        });
+    }
+  }
+
   submit() {
     this.responseGot = true;
     if (this.studentForm.value.present_days > this.studentForm.value.working_days) {
       this.present = true;
     } else {
+      let id = this.studentForm.value.studentId.split(' - ');
       const attendanceData = {
-        student_id: this.studentForm.value.studentId,
+        student_id: id[0],
         month: this.studentForm.value.month,
         working_days: this.studentForm.value.working_days,
         present: this.studentForm.value.present_days,
@@ -67,7 +84,7 @@ export class AttendanceComponent implements OnInit {
               duration: 5000,
               verticalPosition: 'bottom'
             });
-            if(response.body.status == Response.Attendence){
+            if (response.body.status == Response.Saved) {
               this.studentForm.reset();
             }
           }
@@ -76,7 +93,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if(this.subscription && !this.subscription.closed){
+    if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
   }

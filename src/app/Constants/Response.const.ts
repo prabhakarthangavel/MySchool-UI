@@ -1,5 +1,5 @@
 export const Response = {
-    Attendence: 'Saved',
-    Assignment: 'Submited',
+    Saved: 'Saved',
+    Submited: 'Submited',
     Message: 'Message Sent'
 }

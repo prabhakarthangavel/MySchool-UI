@@ -41,4 +41,8 @@ export class CommonService {
   setPerformance(performance: Performance): Observable<any> {
     return this._http.post<any>(MOCK.SET_PERFORMANCE, performance, { observe: 'response' })
   }
+
+  setHoliday(holiday): Observable<any> {
+    return this._http.post<any>(MOCK.SET_HOLIDAY, holiday, { observe: 'response' });
+  }
 }

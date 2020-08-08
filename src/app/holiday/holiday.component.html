@@ -1,0 +1,29 @@
+<div class="margin">
+  <form [formGroup]="holidayForm">
+    <div formArrayName="holidays">
+      <div *ngFor="let items of holidayForm.controls.holidays['controls']; let i=index" [formGroupName]="i">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Holiday Date</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="holidayDate" id="holidayDate{{i}}">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Event</mat-label>
+          <input type="text" formControlName="event" id="event{{i}}" matInput placeholder="Enter the Event">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button id="button" mat-raised-button color="primary" (click)="addItems()">Add Event</button>
+
+    <button id="button" mat-raised-button color="warn" (click)="deleteItems()" *ngIf="holidayForm.controls.holidays.controls.length > 1">Add Event</button>
+
+    <div class="loading-indicator" *ngIf="responseGot">
+      <mat-spinner></mat-spinner>
+    </div>
+  </form>
+</div>
+
+<app-footer id="footer" submit="Submit" cancel="Cancel" [valid]="holidayForm.valid" (card)="submit()"></app-footer>

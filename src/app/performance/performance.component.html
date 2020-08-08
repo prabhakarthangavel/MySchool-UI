@@ -1,8 +1,14 @@
-<div class="margin" id="body">
+<div class="margin">
   <form [formGroup]="performanceForm">
     <mat-form-field appearance="outline">
       <mat-label>Student ID</mat-label>
-      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID" (keyup)="valueEnter($event.target.value)">
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID" 
+      (keyup)="valueEnter($event.target.value)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let result of searchResult" [value]="result">
+          {{result}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <div class="errors">
       <div *ngIf="notFound">Student ID not found in Records</div>
@@ -33,7 +39,8 @@
     only numbers</div>
 </div>
 
-<app-footer id="footer" submit="Submit" cancel="Cancel" [valid]="performanceForm.valid && !notFound && !buttonDisable" (card)="submit()"></app-footer>
+<app-footer id="footer" submit="Submit" cancel="Cancel" [valid]="performanceForm.valid && !notFound && !buttonDisable"
+  (card)="submit()"></app-footer>
 
 <div class="loading-indicator" *ngIf="responseGot">
   <mat-spinner></mat-spinner>

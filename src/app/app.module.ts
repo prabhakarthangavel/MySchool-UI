@@ -17,6 +17,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PerformanceComponent } from './performance/performance.component';
+import { HolidayComponent } from './holiday/holiday.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PerformanceComponent } from './performance/performance.component';
     FooterComponent,
     AssignmentsComponent,
     MessagesComponent,
-    PerformanceComponent
+    PerformanceComponent,
+    HolidayComponent
   ],
   imports: [
     BrowserModule,

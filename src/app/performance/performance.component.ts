@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavBarService } from '../nav-bar/nav-bar.service';
-import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Performance } from '../Models/Performance.interface';
+import { Response } from '../Constants/Response.const';
 
 @Component({
   selector: 'app-performance',
   templateUrl: './performance.component.html',
   styleUrls: ['./performance.component.scss']
 })
-export class PerformanceComponent implements OnInit {
+export class PerformanceComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public examList = ['Term 1', 'Quearterly', 'Term 2', 'Halfyearly', 'Term 3', 'Final Exam'];
   public subList = [];
@@ -19,6 +20,7 @@ export class PerformanceComponent implements OnInit {
   public notFound: boolean;
   public error: boolean;
   public buttonDisable: boolean;
+  public required: boolean;
   public performanceForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
     exam: ['', Validators.required],
@@ -55,11 +57,14 @@ export class PerformanceComponent implements OnInit {
   valueEnter(value) {
     this.notFound = false;
     this.buttonDisable = false;
+    this.searchResult = [];
     if (value.length >= 3) {
       this.subscription = this._service.getStudents(value).subscribe(
         response => {
-          console.log("response", response);
           if (response.status == 200 && response.body.length >= 1) {
+            for (let i = 0; i < response.body.length; i++) {
+              this.searchResult.push(response.body[i].student_id + ' - ' + (response.body[i].name as string).toUpperCase());
+            }
             if (response.body.length == 1) {
               let sId = response.body[0].clas;
               this.subscription = this._service.getSection(sId).subscribe(
@@ -126,14 +131,27 @@ export class PerformanceComponent implements OnInit {
         this.error = true;
       }
     }
+    this.required = false;
     if (!this.error) {
       this.subscription = this._service.setPerformance(subjects).subscribe(
         response => {
-          if(response.status == 200){
-            console.log("response",response);
+          if (response.status == 200) {
+            this.required = true;
+            this._snackBar.open(response.body.status, "Close", {
+              duration: 5000,
+              verticalPosition: 'bottom'
+            });
+            if (response.body.status == Response.Saved) {
+              this.performanceForm.reset();
+            }
           }
         });
     }
   }
 
+  ngOnDestroy() {
+    if (this.subscription && !this.subscription.closed) {
+      this.subscription.unsubscribe();
+    }
+  }
 }
