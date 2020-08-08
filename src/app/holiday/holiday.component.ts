@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@ang
 import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Response } from '../Constants/Response.const';
 
 @Component({
   selector: 'app-holiday',
@@ -12,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HolidayComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
+  public responseGot: boolean;
   public holidayForm: FormGroup = this.fb.group({
     holidays: this.fb.array([this.initItems()])
   });
@@ -52,10 +54,19 @@ export class HolidayComponent implements OnInit, OnDestroy {
       holiday: holiday,
       event: event
     }
-    console.log("holiday",holidays);
+    this.responseGot = true;
     this._service.setHoliday(holidays).subscribe(
       response => {
-        console.log("response",response);
+        this.responseGot = false;
+        if (response.status == 200) {
+          this._snackBar.open(response.body.status, "Close", {
+            duration: 5000,
+            verticalPosition: 'bottom'
+          });
+          if(response.body.status == Response.Saved){
+            this.holidayForm.reset();
+          }
+        }
       });
   }
 
