@@ -15,34 +15,34 @@ export class CommonService {
   constructor(private _http: HttpClient) { }
 
   setAttendance(attendance): Observable<any> {
-    return this._http.post<any>(API.SET_ATTENDANCE, attendance, { observe: 'response' });
+    return this._http.post<any>(MOCK.SET_ATTENDANCE, attendance, { observe: 'response' });
   }
 
   getClasses(): Observable<any> {
-    return this._http.get<any>(API.GET_CLASSES, { observe: 'response' });
+    return this._http.get<any>(MOCK.GET_CLASSES, { observe: 'response' });
   }
 
   getSection(classes): Observable<any> {
-    return this._http.get<any>(API.GET_SECTION + '/' + classes, { observe: 'response' })
+    return this._http.get<any>(MOCK.GET_SECTION + '/' + classes, { observe: 'response' })
   }
 
   setAssignments(assignment): Observable<any> {
-    return this._http.post<any>(API.SET_ASSIGNMENT, assignment, { observe: 'response' });
+    return this._http.post<any>(MOCK.SET_ASSIGNMENT, assignment, { observe: 'response' });
   }
 
   setMessages(message: Message): Observable<any> {
-    return this._http.post<any>(API.SET_MESSAGES, message, { observe: 'response' });
+    return this._http.post<any>(MOCK.SET_MESSAGES, message, { observe: 'response' });
   }
 
   getStudents(studentId: number): Observable<any> {
-    return this._http.get<any>(API.GET_STUDENTS + '/' + studentId, { observe: 'response' });
+    return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response' });
   }
 
   setPerformance(performance: Performance): Observable<any> {
-    return this._http.post<any>(API.SET_PERFORMANCE, performance, { observe: 'response' })
+    return this._http.post<any>(MOCK.SET_PERFORMANCE, performance, { observe: 'response' })
   }
 
   setHoliday(holiday): Observable<any> {
-    return this._http.post<any>(API.SET_HOLIDAY, holiday, { observe: 'response' });
+    return this._http.post<any>(MOCK.SET_HOLIDAY, holiday, { observe: 'response' });
   }
 }

@@ -339,6 +339,8 @@ MIT
 
 @angular/material/form-field
 
+@angular/material/autocomplete
+
 @angular/material/select
 
 @angular/material/button

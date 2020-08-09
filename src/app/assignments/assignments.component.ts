@@ -23,7 +23,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   public allClass = [];
   public allSection = [];
   public allSubjects = [];
-  public responseGot: boolean;
+  public spinner: boolean;
   public date: string;
   public dateInvalid: boolean;
   public descriptionLength: number = 0;
@@ -77,11 +77,11 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    this.responseGot = true;
+    this.spinner = true;
     this.dateInvalid = false;
     var current_timestamp = new Date();
     if (current_timestamp > this.assignmentForm.value.dueDate) {
-      this.responseGot = false;
+      this.spinner = false;
       this.dateInvalid = true;
     } else {
       let dt = this.assignmentForm.value.dueDate.toString().split(' ');
@@ -95,7 +95,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
       }
       this.subscription = this._service.setAssignments(assignment).subscribe(
         response => {
-          this.responseGot = false;
+          this.spinner = false;
           if (response.status == 200) {
             this._snackBar.open(response.body.status, "Close", {
               duration: 5000,
@@ -110,7 +110,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   }
 
   onChange(event){
-    this.descriptionLength = event.target.value.length + 1;
+    this.descriptionLength = event.target.value.length;
   }
 
   ngOnDestroy() {

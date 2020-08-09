@@ -13,7 +13,7 @@ import { Response } from '../Constants/Response.const';
 })
 export class HolidayComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
-  public responseGot: boolean;
+  public spinner: boolean;
   public holidayForm: FormGroup = this.fb.group({
     holidays: this.fb.array([this.initItems()])
   });
@@ -54,10 +54,10 @@ export class HolidayComponent implements OnInit, OnDestroy {
       holiday: holiday,
       event: event
     }
-    this.responseGot = true;
+    this.spinner = true;
     this._service.setHoliday(holidays).subscribe(
       response => {
-        this.responseGot = false;
+        this.spinner = false;
         if (response.status == 200) {
           this._snackBar.open(response.body.status, "Close", {
             duration: 5000,

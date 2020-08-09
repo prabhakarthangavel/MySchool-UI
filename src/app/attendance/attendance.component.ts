@@ -15,7 +15,7 @@ export class AttendanceComponent implements OnInit {
   public subscription: Subscription;
   public totalDays: number;
   public present: boolean;
-  public responseGot: boolean;
+  public spinner: boolean;
   public searchResult = [];
   public studentForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
@@ -64,9 +64,10 @@ export class AttendanceComponent implements OnInit {
   }
 
   submit() {
-    this.responseGot = true;
+    this.spinner = true;
     if (this.studentForm.value.present_days > this.studentForm.value.working_days) {
       this.present = true;
+      this.spinner = false;
     } else {
       let id = this.studentForm.value.studentId.split(' - ');
       const attendanceData = {
@@ -78,7 +79,7 @@ export class AttendanceComponent implements OnInit {
       }
       this.subscription = this._service.setAttendance(attendanceData).subscribe(
         response => {
-          this.responseGot = false;
+          this.spinner = false;
           if (response.status == 200 && response.body.status) {
             this._snackBar.open(response.body.status, "Close", {
               duration: 5000,

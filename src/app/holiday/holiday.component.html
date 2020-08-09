@@ -18,9 +18,9 @@
 
     <button id="button" mat-raised-button color="primary" (click)="addItems()">Add Event</button>
 
-    <button id="button" mat-raised-button color="warn" (click)="deleteItems()" *ngIf="holidayForm.controls.holidays.controls.length > 1">Add Event</button>
+    <button id="button" mat-raised-button color="warn" (click)="deleteItems()" *ngIf="holidayForm.controls.holidays['controls'].length > 1">Add Event</button>
 
-    <div class="loading-indicator" *ngIf="responseGot">
+    <div class="loading-indicator" *ngIf="spinner">
       <mat-spinner></mat-spinner>
     </div>
   </form>

@@ -46,10 +46,9 @@
       <div *ngIf="present_days.errors.pattern">Enter Only Numbers</div>
     </div>
   </form>
+  <div class="loading-indicator" *ngIf="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>
 
 <app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
-
-<div class="loading-indicator" *ngIf="responseGot">
-  <mat-spinner></mat-spinner>
-</div>

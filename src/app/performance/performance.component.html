@@ -42,6 +42,6 @@
 <app-footer id="footer" submit="Submit" cancel="Cancel" [valid]="performanceForm.valid && !notFound && !buttonDisable"
   (card)="submit()"></app-footer>
 
-<div class="loading-indicator" *ngIf="responseGot">
+<div class="loading-indicator" *ngIf="spinner">
   <mat-spinner></mat-spinner>
 </div>

@@ -21,7 +21,7 @@ export class PerformanceComponent implements OnInit, OnDestroy {
   public error: boolean;
   public buttonDisable: boolean;
   public required: boolean;
-  public responseGot: boolean;
+  public spinner: boolean;
   public performanceForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
     exam: ['', Validators.required],
@@ -132,12 +132,12 @@ export class PerformanceComponent implements OnInit, OnDestroy {
         this.error = true;
       }
     }
-    this.responseGot = true;
+    this.spinner = true;
     this.required = false;
     if (!this.error) {
       this.subscription = this._service.setPerformance(subjects).subscribe(
         response => {
-          this.responseGot = false;
+          this.spinner = false;
           if (response.status == 200) {
             this.required = true;
             this._snackBar.open(response.body.status, "Close", {

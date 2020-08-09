@@ -25,7 +25,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public messageTypes = ['Student', 'Class'];
   public allClass = [];
   public descriptionLength: number = 0;
-  public responseGot: boolean; 
+  public spinner: boolean; 
   public required: boolean;
   constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) { }
 
@@ -78,7 +78,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       } else if (clas == "") {
         clas = 0
       }
-      this.responseGot = true;
+      this.spinner = true;
       let message: Message = {
         studentId: id,
         clas: clas,
@@ -86,7 +86,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
       }
       this.subscription = this._service.setMessages(message).subscribe(
         response => {
-          this.responseGot = false;
+          this.spinner = false;
           if (response.status == 200) {
             this._snackBar.open(response.body.status, "Close", {
               duration: 5000,
@@ -102,7 +102,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   onChange(event) {
-    this.descriptionLength = event.target.value.length + 1;
+    this.descriptionLength = event.target.value.length;
   }
 
   ngOnDestroy() {

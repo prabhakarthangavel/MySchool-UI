@@ -37,7 +37,7 @@
     </div>
 
     <mat-form-field appearance="outline">
-      <textarea matInput placeholder="Enter Description" (keypress)="onChange($event)" formControlName="description"
+      <textarea matInput placeholder="Enter Description" (input)="onChange($event)" formControlName="description"
         rows="10">
        </textarea>
     </mat-form-field>
@@ -64,6 +64,6 @@
 
 <app-footer submit="Submit" cancel="Cancel" [valid]="assignmentForm.valid" (card)="submit()"></app-footer>
 
-<div class="loading-indicator" *ngIf="responseGot">
+<div class="loading-indicator" *ngIf="spinner">
   <mat-spinner></mat-spinner>
 </div>
