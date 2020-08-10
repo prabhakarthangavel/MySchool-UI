@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="loggedIn">
   <mat-toolbar color="primary">
     <button mat-icon-button>
       <mat-icon *ngIf="_navBar.navFlag" (click)="snav.toggle()">menu</mat-icon>

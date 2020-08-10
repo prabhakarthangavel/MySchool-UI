@@ -1,3 +1,19 @@
-<p>
-  login works!
-</p>
+<div class="main">
+  <div class="login">
+    <form [formGroup]="loginForm" class="form">
+      <img mat-card-image class="image" src="assets/school.jpg">
+
+      <mat-form-field appearance="outline">
+        <mat-label>User ID</mat-label>
+        <input type="text" formControlName="user_id" id="user_id" matInput placeholder="Enter User ID">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="text" formControlName="password" id="password" matInput placeholder="Enter Password">
+      </mat-form-field>
+
+      <button id="button" mat-raised-button color="primary" (click)="login()">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.main{
+    background-color: #673ab7;
+    height: 100vh;  
+    display: flex;
+    justify-content: center;
+}
+.form{
+    margin: 3% 3% 0 3%;
+}
+
+.image{
+    margin: 0 25% 10% 25%;
+    max-width: 50%;
+    max-height: 50%;
+    border-radius: 35%;
+}
+
+.login{
+    margin: 0;
+    background: white;
+    height: 65vh;
+    border-radius: 1.5rem;
+    width: 80%;
+    margin: 25% 8% 0 8%;
+    min-height: 200px; 
+}
+
+#button{
+    width: 100%;
+}

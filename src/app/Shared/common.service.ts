@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API } from '../Constants/API.const';
 import { MOCK } from '../Constants/MOCK.const';
-import { AllClass } from '../Models/AllClass.interface';
 import { Message } from '../Models/Message.interface';
 import { Performance } from '../Models/Performance.interface';
 

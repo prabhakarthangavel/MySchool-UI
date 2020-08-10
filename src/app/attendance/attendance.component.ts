@@ -56,7 +56,7 @@ export class AttendanceComponent implements OnInit {
         response => {
           if (response.status == 200 && response.body.length >= 1) {
             for (let i = 0; i < response.body.length; i++) {
-              this.searchResult.push(response.body[i].student_id + ' - ' + (response.body[i].name as string).toUpperCase());
+              this.searchResult.push(response.body[i].student_id + ' - ' + (response.body[i].first_name as string).toUpperCase());
             }
           }
         });
