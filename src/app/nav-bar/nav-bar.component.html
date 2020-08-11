@@ -1,4 +1,4 @@
-<div *ngIf="loggedIn">
+<div *ngIf="_loginService.isAuthenticated()">
   <mat-toolbar color="primary">
     <button mat-icon-button>
       <mat-icon *ngIf="_navBar.navFlag" (click)="snav.toggle()">menu</mat-icon>
@@ -11,7 +11,7 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <mat-nav-list (click)="snav.toggle()">
-        <a mat-list-item>Prabhakar Thangavel</a>
+        <a mat-list-item>{{_loginService.getUserName() | titlecase}}</a>
         <a mat-list-item routerLink="/landing">Home</a>
         <a mat-list-item routerLink="/">LogOut</a>
       </mat-nav-list>

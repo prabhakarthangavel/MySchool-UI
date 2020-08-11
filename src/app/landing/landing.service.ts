@@ -11,7 +11,4 @@ export class LandingService {
 
   constructor(private _http: HttpClient) { }
 
-  getWelcome():Observable<any>{
-    return this._http.get<any>(MOCK.welcome);
-  }
 }

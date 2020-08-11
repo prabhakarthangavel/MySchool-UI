@@ -20,11 +20,6 @@ export class LandingComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
-    this.subscription = this._landingService.getWelcome().subscribe(
-      response => {
-        this.welcome = response.status;
-      }
-    )
   }
 
   clickHandle(page) {

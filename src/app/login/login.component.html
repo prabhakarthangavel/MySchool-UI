@@ -10,10 +10,15 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input type="text" formControlName="password" id="password" matInput placeholder="Enter Password">
+        <input type="password" formControlName="password" id="password" matInput placeholder="Enter Password">
       </mat-form-field>
 
       <button id="button" mat-raised-button color="primary" (click)="login()">Submit</button>
     </form>
   </div>
+</div>
+
+
+<div class="loading-indicator" *ngIf="spinner">
+  <mat-spinner></mat-spinner>
 </div>

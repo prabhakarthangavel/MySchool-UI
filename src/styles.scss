@@ -53,6 +53,7 @@ mat-form-field{
 .mat-snack-bar-handset .mat-snack-bar-container {
     margin-bottom: 70px !important;
 }
-// mat-sidenav-content{
-//     background-color: whitesmoke;
-// }
+
+.mat-sidenav-fixed {
+    min-width: 45%;
+}
