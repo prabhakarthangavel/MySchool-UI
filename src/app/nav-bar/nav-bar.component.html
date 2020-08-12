@@ -13,7 +13,7 @@
       <mat-nav-list (click)="snav.toggle()">
         <a mat-list-item>{{_loginService.getUserName() | titlecase}}</a>
         <a mat-list-item routerLink="/landing">Home</a>
-        <a mat-list-item routerLink="/">LogOut</a>
+        <a mat-list-item (click)="logout()">LogOut</a>
       </mat-nav-list>
     </mat-sidenav>
 

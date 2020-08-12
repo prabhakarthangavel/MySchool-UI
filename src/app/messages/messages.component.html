@@ -14,7 +14,13 @@
 
     <mat-form-field appearance="outline" *ngIf="msgStudent">
       <mat-label>Student ID</mat-label>
-      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID">
+      <input type="text" formControlName="studentId" id="studentId" matInput placeholder="Enter Student ID" (keyup)="valueEnter($event.target.value)"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let result of searchResult" [value]="result">
+          {{result}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <div class="errors" *ngIf="msgStudent">
       <div *ngIf="required">Student ID is Required</div>
@@ -33,8 +39,7 @@
     </div>
 
     <mat-form-field appearance="outline">
-      <textarea matInput placeholder="Enter Message" (input)="onChange($event)" formControlName="message"
-        rows="10">
+      <textarea matInput placeholder="Enter Message" (input)="onChange($event)" formControlName="message" rows="10">
        </textarea>
     </mat-form-field>
     <div class="warning">You have entered {{descriptionLength }} of 1000</div>

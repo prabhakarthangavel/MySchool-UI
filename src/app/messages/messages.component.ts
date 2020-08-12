@@ -16,6 +16,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public msgStudent: boolean;
   public msgClass: boolean;
+  public searchResult = []
   public messageForm: FormGroup = this.fb.group({
     messageTo: ['', Validators.required],
     studentId: [''],
@@ -63,6 +64,20 @@ export class MessagesComponent implements OnInit, OnDestroy {
       this.msgStudent = true;
     } else if (event == 'Class') {
       this.msgClass = true;
+    }
+  }
+
+  valueEnter(value) {
+    this.searchResult = [];
+    if (value.length >= 3) {
+      this.subscription = this._service.getStudents(value).subscribe(
+        response => {
+          if (response.status == 200 && response.body.length >= 1) {
+            for (let i = 0; i < response.body.length; i++) {
+              this.searchResult.push(response.body[i].student_id + ' - ' + (response.body[i].first_name as string).toUpperCase());
+            }
+          }
+        });
     }
   }
 

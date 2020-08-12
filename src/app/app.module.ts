@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { AssignmentsComponent } from './assignments/assignments.component';
 import { MessagesComponent } from './messages/messages.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { HolidayComponent } from './holiday/holiday.component';
+import { InterceptorService } from './Shared/Interceptor.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { HolidayComponent } from './holiday/holiday.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

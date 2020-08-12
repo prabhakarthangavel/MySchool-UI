@@ -18,9 +18,6 @@ export class LoginComponent implements OnInit {
     password: ['']
   });
   constructor(private fb: FormBuilder, private _service: LoginService, private _snackBar: MatSnackBar, private _router: Router) {
-    if (localStorage.getItem('token')) {
-      localStorage.removeItem('token');
-    }
   }
 
   ngOnInit() {
