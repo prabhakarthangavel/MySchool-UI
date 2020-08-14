@@ -1,4 +1,4 @@
-<div class="margin">
+<div class="margin" *ngIf="_loginService.isTeacher()">
   <form [formGroup]="studentForm">
     <mat-form-field appearance="outline">
       <mat-label>Student ID</mat-label>
@@ -46,9 +46,21 @@
       <div *ngIf="present_days.errors.pattern">Enter Only Numbers</div>
     </div>
   </form>
-  <div class="loading-indicator" *ngIf="spinner">
-    <mat-spinner></mat-spinner>
-  </div>
+  <app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
 </div>
 
-<app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
+<div class="tableMargin" *ngIf="_loginService.isStudent()">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <mat-header-cell *matHeaderCellDef> {{column | titlecase}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<div class="loading-indicator" *ngIf="spinner">
+  <mat-spinner></mat-spinner>
+</div>

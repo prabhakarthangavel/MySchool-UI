@@ -17,25 +17,34 @@ export class LoginComponent implements OnInit {
     user_id: [''],
     password: ['']
   });
-  constructor(private fb: FormBuilder, private _service: LoginService, private _snackBar: MatSnackBar, private _router: Router) {
+  constructor(private fb: FormBuilder, private _loginService: LoginService, private _snackBar: MatSnackBar, private _router: Router) {
   }
 
   ngOnInit() {
+    if(this._loginService.isAuthenticated()) {
+      this._router.navigate(['/landing']);
+    }
   }
 
   login() {
-    console.log(this.loginForm.value);
     const credentials = {
       username: this.loginForm.value.user_id,
       password: this.loginForm.value.password
     }
     this.spinner = true;
-    this.subscription = this._service.authenticate(credentials).subscribe(
+    this.subscription = this._loginService.authenticate(credentials).subscribe(
       response => {
         this.spinner = false;
-        if (response.status == 200 && response.body.jwt) {
-          localStorage.setItem('token', response.body.jwt);
-          this._router.navigate(['/landing']);
+        if (response.status == 200) {
+          if (response.body.jwt == null) {
+            this._snackBar.open("Invalid Credentials!! Try Again.", "Close", {
+              duration: 5000,
+              verticalPosition: 'bottom'
+            });
+          } else {
+            localStorage.setItem('token', response.body.jwt);
+            this._router.navigate(['/landing']);
+          }
         }
       });
   }

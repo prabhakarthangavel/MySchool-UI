@@ -1,10 +1,12 @@
-<div *ngIf="_loginService.isAuthenticated()">
+<div>
   <mat-toolbar color="primary">
-    <button mat-icon-button>
-      <mat-icon *ngIf="_navBar.navFlag" (click)="snav.toggle()">menu</mat-icon>
-      <mat-icon *ngIf="!_navBar.navFlag" (click)="backClicked()">arrow_back</mat-icon>
-    </button>
-    <span>{{_navBar.getTitle()}}</span>
+    <div *ngIf="_loginService.isAuthenticated()">
+      <button mat-icon-button>
+        <mat-icon *ngIf="_navBar.navFlag" (click)="snav.toggle()">menu</mat-icon>
+        <mat-icon *ngIf="!_navBar.navFlag" (click)="backClicked()">arrow_back</mat-icon>
+      </button>
+      <span>{{_navBar.getTitle()}}</span>
+    </div>
   </mat-toolbar>
 
   <mat-sidenav-container fullscreen [style.marginTop.px]="56">
@@ -13,7 +15,7 @@
       <mat-nav-list (click)="snav.toggle()">
         <a mat-list-item>{{_loginService.getUserName() | titlecase}}</a>
         <a mat-list-item routerLink="/landing">Home</a>
-        <a mat-list-item (click)="logout()">LogOut</a>
+        <a mat-list-item (click)="_loginService.logout()">LogOut</a>
       </mat-nav-list>
     </mat-sidenav>
 

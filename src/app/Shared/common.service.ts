@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { API } from '../Constants/API.const';
 import { MOCK } from '../Constants/MOCK.const';
 import { Message } from '../Models/Message.interface';
 import { Performance } from '../Models/Performance.interface';
+import { Attendance } from '../Models/Attendace.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,9 @@ export class CommonService {
 
   setHoliday(holiday): Observable<any> {
     return this._http.post<any>(MOCK.SET_HOLIDAY, holiday, { observe: 'response' });
+  }
+
+  getAttendance(student_id): Observable<HttpResponse<Attendance[]>> {
+    return this._http.get<Attendance[]>(MOCK.GET_ATTENDANCE + '/' +student_id, {observe: 'response'});
   }
 }

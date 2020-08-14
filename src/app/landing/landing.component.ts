@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LandingService } from './landing.service';
 import { Router } from '@angular/router';
 import { NavBarService } from '../nav-bar/nav-bar.service';
 import { Subscription } from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-landing',
@@ -13,17 +13,17 @@ export class LandingComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public welcome: string;
 
-  constructor(private _landingService: LandingService, private _router: Router,
-    private _navBar: NavBarService) { 
-      this._navBar.setShow();
-      this._navBar.title = "St Joseph School";
-    }
+  constructor(private _router: Router,
+    private _navBar: NavBarService, private _loginService: LoginService) {
+    this._navBar.setShow();
+    this._navBar.title = "St Joseph School";
+  }
 
   ngOnInit() {
   }
 
   clickHandle(page) {
-    this._router.navigate(['/',page]);
+    this._router.navigate(['/', page]);
   }
 
   ngOnDestroy() {

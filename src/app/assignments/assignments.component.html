@@ -57,12 +57,11 @@
       <div *ngIf="dueDate.errors.required">Due date is Required</div>
     </div>
     <div class="errors" *ngIf="dateInvalid">Due date should not be past date</div>
-
   </form>
+  <app-footer submit="Submit" cancel="Cancel" [valid]="assignmentForm.valid" (card)="submit()"></app-footer>
 </div>
 
 
-<app-footer submit="Submit" cancel="Cancel" [valid]="assignmentForm.valid" (card)="submit()"></app-footer>
 
 <div class="loading-indicator" *ngIf="spinner">
   <mat-spinner></mat-spinner>

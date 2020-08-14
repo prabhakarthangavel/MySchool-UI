@@ -8,5 +8,7 @@ export const API = {
     GET_STUDENTS: "https://firstschoolapp.herokuapp.com/teacher/getStudents",
     SET_PERFORMANCE: "https://firstschoolapp.herokuapp.com/teacher/setPerformance",
     SET_HOLIDAY: "https://firstschoolapp.herokuapp.com/teacher/setHoliday",
-    AUTHENTICATE: "https://firstschoolapp.herokuapp.com/authenticate"
+    AUTHENTICATE: "https://firstschoolapp.herokuapp.com/authenticate",
+
+    GET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/student/getAttendance"
 }

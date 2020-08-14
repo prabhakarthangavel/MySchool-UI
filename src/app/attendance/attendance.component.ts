@@ -5,6 +5,8 @@ import { CommonService } from '../Shared/common.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { Response } from '../Constants/Response.const';
+import { LoginService } from '../login/login.service';
+import { Attendance } from '../Models/Attendace.interface';
 
 @Component({
   selector: 'app-attendance',
@@ -12,6 +14,9 @@ import { Response } from '../Constants/Response.const';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
+  public displayedColumns: string[] = ['working_days','present','absent','percentage','month','year'];
+  public dataSource: Attendance [] = [];
+  
   public subscription: Subscription;
   public totalDays: number;
   public present: boolean;
@@ -25,12 +30,19 @@ export class AttendanceComponent implements OnInit {
   });
   public allMonths = [{ 'month': 'January' }, { 'month': 'February' }, { 'month': 'March' }, { 'month': 'April' }, { 'month': 'May' }, { 'month': 'June' }, { 'month': 'July' }, { 'month': 'August' }, { 'month': 'September' }, { 'month': 'October' }, { 'month': 'November' }, { 'month': 'December' }];
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Attendance");
   }
 
   ngOnInit() {
+    if (this._loginService.isStudent()) {
+      let studentId = this._loginService.getStudentId();
+      this.subscription = this._service.getAttendance(studentId).subscribe(
+        response => {
+          this.dataSource = response.body;
+        });
+    }
   }
 
   get studentId() {
