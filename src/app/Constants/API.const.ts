@@ -10,5 +10,6 @@ export const API = {
     SET_HOLIDAY: "https://firstschoolapp.herokuapp.com/teacher/setHoliday",
     AUTHENTICATE: "https://firstschoolapp.herokuapp.com/authenticate",
 
-    GET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/student/getAttendance"
+    GET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/student/getAttendance",
+    GET_ASSIGNMENTS: "https://firstschoolapp.herokuapp.com/student/getAssignments"
 }

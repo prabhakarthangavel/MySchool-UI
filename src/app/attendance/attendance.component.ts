@@ -14,9 +14,10 @@ import { Attendance } from '../Models/Attendace.interface';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
-  public displayedColumns: string[] = ['working_days','present','absent','percentage','month','year'];
-  public dataSource: Attendance [] = [];
-  
+  public displayedColumns: string[] = ['working_days', 'present', 'absent', 'percentage', 'month', 'year'];
+  public dataSource = [];
+  public totalPresent: number = 0;
+  public totalAbsent: number = 0;
   public subscription: Subscription;
   public totalDays: number;
   public present: boolean;
@@ -41,6 +42,10 @@ export class AttendanceComponent implements OnInit {
       this.subscription = this._service.getAttendance(studentId).subscribe(
         response => {
           this.dataSource = response.body;
+          for (let i = 0; i < this.dataSource.length; i++) {
+            this.totalPresent = this.totalPresent + this.dataSource[i].present;
+            this.totalAbsent = this.totalAbsent + this.dataSource[i].absent;
+          }
         });
     }
   }

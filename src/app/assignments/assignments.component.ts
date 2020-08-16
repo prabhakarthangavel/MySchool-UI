@@ -5,6 +5,7 @@ import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Response } from '../Constants/Response.const';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-assignments',
@@ -27,7 +28,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   public date: string;
   public dateInvalid: boolean;
   public descriptionLength: number = 0;
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Assignments");
     // this.assignmentForm.get('description').valueChanges.subscribe(
@@ -38,12 +39,22 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this._service.getClasses().subscribe(
-      response => {
-        if (response.status == 200) {
-          this.allClass = response.body;
+    if (this._loginService.isTeacher()) {
+      this.subscription = this._service.getClasses().subscribe(
+        response => {
+          if (response.status == 200) {
+            this.allClass = response.body;
+          }
+        });
+    }
+    if(this._loginService.isStudent()){
+      let studentId = this._loginService.getStudentId();
+      this.subscription = this._service.getAssignments(studentId).subscribe(
+        response => {
+          console.log("resonse",response);
         }
-      });
+      )
+    }
   }
 
   get class() {
@@ -84,14 +95,14 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
       this.spinner = false;
       this.dateInvalid = true;
     } else {
-      let dt = this.assignmentForm.value.dueDate.toString().split(' ');
-      this.date = dt[2] + '/' + dt[1] + '/' + dt[3];
+      // let dt = this.assignmentForm.value.dueDate.toString().split(' ');
+      // this.date = dt[2] + '/' + dt[1] + '/' + dt[3];
       const assignment = {
         clas: this.assignmentForm.value.class,
         section: this.assignmentForm.value.section,
         subject: this.assignmentForm.value.subject,
         description: this.assignmentForm.value.description,
-        dueDate: this.date
+        dueDate: this.assignmentForm.value.dueDate
       }
       this.subscription = this._service.setAssignments(assignment).subscribe(
         response => {
@@ -101,7 +112,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
               duration: 5000,
               verticalPosition: 'bottom'
             });
-            if(response.body.status == Response.Submited){
+            if (response.body.status == Response.Submited) {
               this.assignmentForm.reset();
             }
           }
@@ -109,12 +120,12 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChange(event){
+  onChange(event) {
     this.descriptionLength = event.target.value.length;
   }
 
   ngOnDestroy() {
-    if(this.subscription && !this.subscription.closed){
+    if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
   }

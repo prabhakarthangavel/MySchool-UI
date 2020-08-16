@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { InterceptorService } from './Shared/Interceptor.service';
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { InterceptorService } from './Shared/Interceptor.service';
     AssignmentsComponent,
     MessagesComponent,
     PerformanceComponent,
-    HolidayComponent
+    HolidayComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { InterceptorService } from './Shared/Interceptor.service';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]

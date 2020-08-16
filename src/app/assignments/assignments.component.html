@@ -1,4 +1,4 @@
-<div class="margin">
+<div class="margin" *ngIf="_loginService.isTeacher()">
   <form [formGroup]="assignmentForm">
     <mat-form-field appearance="outline">
       <mat-label>Class</mat-label>

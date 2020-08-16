@@ -10,5 +10,6 @@ export const MOCK = {
     SET_HOLIDAY: "http://localhost:8080/teacher/setHoliday",
     AUTHENTICATE: "http://localhost:8080/authenticate",
 
-    GET_ATTENDANCE: "http://localhost:8080/student/getAttendance"
+    GET_ATTENDANCE: "http://localhost:8080/student/getAttendance",
+    GET_ASSIGNMENTS: "http://localhost:8080/student/getAssignments"
 }

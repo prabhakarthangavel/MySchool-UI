@@ -6,6 +6,7 @@ import { MOCK } from '../Constants/MOCK.const';
 import { Message } from '../Models/Message.interface';
 import { Performance } from '../Models/Performance.interface';
 import { Attendance } from '../Models/Attendace.interface';
+import { Assignments } from '../Models/Assigments.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,10 @@ export class CommonService {
   }
 
   getAttendance(student_id): Observable<HttpResponse<Attendance[]>> {
-    return this._http.get<Attendance[]>(MOCK.GET_ATTENDANCE + '/' +student_id, {observe: 'response'});
+    return this._http.get<Attendance[]>(MOCK.GET_ATTENDANCE + '/' + student_id, { observe: 'response' });
+  }
+
+  getAssignments(student_id): Observable<HttpResponse<Assignments[]>> {
+    return this._http.get<Assignments[]>(MOCK.GET_ASSIGNMENTS + '/' + student_id, { observe: 'response' });
   }
 }

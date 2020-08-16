@@ -6,17 +6,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./cards.component.scss']
 })
 export class CardsComponent implements OnInit {
-  @Input('image')image:string;
+  @Input('image') image: string;
   @Output('card') card = new EventEmitter<string>();
 
-  constructor() { 
+  constructor() {
 
   }
 
   ngOnInit() {
   }
 
-  cardClicked(value:string){
+  cardClicked(value: string) {
     this.card.emit(value);
   }
 

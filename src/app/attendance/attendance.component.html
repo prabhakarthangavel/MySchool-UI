@@ -49,16 +49,36 @@
   <app-footer submit="Submit" cancel="Cancel" [valid]="studentForm.valid" (card)="submit()"></app-footer>
 </div>
 
-<div class="tableMargin" *ngIf="_loginService.isStudent()">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-      <mat-header-cell *matHeaderCellDef> {{column | titlecase}} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
-    </ng-container>
+<div *ngIf="_loginService.isStudent()">
+  <div class="chart">
+    <app-pie-chart [present]="totalPresent" [absent]="totalAbsent"></app-pie-chart>
+  </div>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  <div class="cardsMargin" *ngFor="let data of dataSource">
+    <mat-card class="border">
+      <mat-card-title>{{data.month}}</mat-card-title>
+      <mat-card-subtitle>{{data.year}}</mat-card-subtitle>
+
+      <mat-card-content>
+        <div class="flexbox-container">
+          <span class="flexbox-item1">Working Days</span>
+          <span class="flexbox-item2">{{data.working_days}}</span>
+        </div>
+        <div class="flexbox-container">
+          <span class="flexbox-item1">Present</span>
+          <span class="flexbox-item2">{{data.present}}</span>
+        </div>
+        <div class="flexbox-container">
+          <span class="flexbox-item1">Absent</span>
+          <span class="flexbox-item2">{{data.absent}}</span>
+        </div>
+        <div class="flexbox-container">
+          <span class="flexbox-item1">Percentage</span>
+          <span class="flexbox-item2">{{data.percentage}}%</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
 <div class="loading-indicator" *ngIf="spinner">
