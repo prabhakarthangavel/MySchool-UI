@@ -13,6 +13,9 @@ import { LoginService } from '../login/login.service';
   styleUrls: ['./assignments.component.scss']
 })
 export class AssignmentsComponent implements OnInit, OnDestroy {
+  public displayedColumns: string[] = ['subject', 'dueDate', 'description'];
+  public upcommingList = [];
+  public completedList = [];
   public subscription: Subscription;
   public assignmentForm: FormGroup = this.fb.group({
     class: ['', Validators.required],
@@ -47,11 +50,19 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
           }
         });
     }
-    if(this._loginService.isStudent()){
+    if (this._loginService.isStudent()) {
       let studentId = this._loginService.getStudentId();
       this.subscription = this._service.getAssignments(studentId).subscribe(
         response => {
-          console.log("resonse",response);
+          if (response.status == 200) {
+            for (let i = 0; i < response.body.length; i++) {
+              if (new Date(response.body[i].dueDate).getTime() >= new Date().getTime()) {
+                this.upcommingList.push(response.body[i]);
+              } else {
+                this.completedList.push(response.body[i]);
+              }
+            }
+          }
         }
       )
     }
@@ -95,14 +106,13 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
       this.spinner = false;
       this.dateInvalid = true;
     } else {
-      // let dt = this.assignmentForm.value.dueDate.toString().split(' ');
-      // this.date = dt[2] + '/' + dt[1] + '/' + dt[3];
       const assignment = {
         clas: this.assignmentForm.value.class,
         section: this.assignmentForm.value.section,
         subject: this.assignmentForm.value.subject,
         description: this.assignmentForm.value.description,
-        dueDate: this.assignmentForm.value.dueDate
+        dueDate: this.assignmentForm.value.dueDate,
+        created_by: this._loginService.getUserName()
       }
       this.subscription = this._service.setAssignments(assignment).subscribe(
         response => {

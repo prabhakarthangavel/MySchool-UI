@@ -37,8 +37,7 @@
     </div>
 
     <mat-form-field appearance="outline">
-      <textarea matInput placeholder="Enter Description" (input)="onChange($event)" formControlName="description"
-        rows="10">
+      <textarea matInput placeholder="Enter Description" (input)="onChange($event)" formControlName="description" rows="10">
        </textarea>
     </mat-form-field>
     <div class="warning">You have entered {{descriptionLength }} of 3500</div>
@@ -61,7 +60,32 @@
   <app-footer submit="Submit" cancel="Cancel" [valid]="assignmentForm.valid" (card)="submit()"></app-footer>
 </div>
 
-
+<div *ngIf="_loginService.isStudent()">
+  <mat-tab-group>
+    <mat-tab label="To Do">
+      <div class="cardsMargin" *ngFor="let data of upcommingList">
+        <mat-card class="border">
+          <mat-card-title>{{data.subject | titlecase}}</mat-card-title>
+          <mat-card-subtitle>Submit on {{data.dueDate | date}}</mat-card-subtitle>
+          <mat-card-content>
+            {{data.description}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Completed">
+      <div class="cardsMargin" *ngFor="let data of completedList">
+        <mat-card class="border">
+          <mat-card-title>{{data.subject | titlecase}}</mat-card-title>
+          <mat-card-subtitle>Submit on {{data.dueDate | date}}</mat-card-subtitle>
+          <mat-card-content>
+            {{data.description}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
 <div class="loading-indicator" *ngIf="spinner">
   <mat-spinner></mat-spinner>

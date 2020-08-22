@@ -7,6 +7,7 @@ import { Message } from '../Models/Message.interface';
 import { Performance } from '../Models/Performance.interface';
 import { Attendance } from '../Models/Attendace.interface';
 import { Assignments } from '../Models/Assigments.interface';
+import { mergeMap, map, flatMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,10 @@ export class CommonService {
 
   getAssignments(student_id): Observable<HttpResponse<Assignments[]>> {
     return this._http.get<Assignments[]>(MOCK.GET_ASSIGNMENTS + '/' + student_id, { observe: 'response' });
+  }
+
+  getMessageClass(student_id): Observable<any> {
+    return this._http.get<any>(MOCK.GET_STUDENT_CLASS + '/' + student_id, { observe: 'response' }).pipe(
+      flatMap(clas => this._http.get<any>(MOCK.GET_MESSAGE_CLASS + '/' + clas.body, { observe: 'response' })));
   }
 }

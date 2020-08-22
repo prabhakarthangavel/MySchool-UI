@@ -11,5 +11,7 @@ export const MOCK = {
     AUTHENTICATE: "http://localhost:8080/authenticate",
 
     GET_ATTENDANCE: "http://localhost:8080/student/getAttendance",
-    GET_ASSIGNMENTS: "http://localhost:8080/student/getAssignments"
+    GET_ASSIGNMENTS: "http://localhost:8080/student/getAssignments",
+    GET_MESSAGE_CLASS: "http://localhost:8080/student/getMessageClass",
+    GET_STUDENT_CLASS: "http://localhost:8080/student/getClass"
 }

@@ -1,4 +1,4 @@
-<div class="margin">
+<div class="margin" *ngIf="_loginService.isTeacher()">
   <form [formGroup]="messageForm">
     <mat-form-field appearance="outline">
       <mat-label>Message To</mat-label>
@@ -49,9 +49,34 @@
     </div>
 
   </form>
+  <app-footer submit="Submit" cancel="Cancel" [valid]="messageForm.valid" (card)="submit()"></app-footer>
 </div>
 
-<app-footer submit="Submit" cancel="Cancel" [valid]="messageForm.valid" (card)="submit()"></app-footer>
+<div *ngIf="_loginService.isStudent()">
+  <mat-tab-group>
+    <mat-tab label="Class Message">
+      <div class="cardsMargin" *ngFor="let data of classMessage">
+        <mat-card class="border">
+          <mat-card-subtitle>{{data.created_on | date}}</mat-card-subtitle>
+          <mat-card-content>
+            {{data.message}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Student Message">
+      <div class="cardsMargin" *ngFor="let data of studentMessage">
+        <mat-card class="border">
+          <mat-card-title>{{data.subject | titlecase}}</mat-card-title>
+          <mat-card-subtitle>Submit on {{data.dueDate | date}}</mat-card-subtitle>
+          <mat-card-content>
+            {{data.description}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 
 <div class="loading-indicator" *ngIf="spinner">
   <mat-spinner></mat-spinner>

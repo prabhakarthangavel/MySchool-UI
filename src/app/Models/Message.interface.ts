@@ -1,5 +1,7 @@
 export interface Message {
-    studentId: number, 
+    student_id: string, 
     clas: number,
-    message: string
+    message: string,
+    created_on: Date,
+    created_by: string
 }

@@ -92,7 +92,8 @@ export class AttendanceComponent implements OnInit {
         month: this.studentForm.value.month,
         working_days: this.studentForm.value.working_days,
         present: this.studentForm.value.present_days,
-        year: new Date().getFullYear()
+        year: new Date().getFullYear(),
+        created_by: this._loginService.getUserName()
       }
       this.subscription = this._service.setAttendance(attendanceData).subscribe(
         response => {

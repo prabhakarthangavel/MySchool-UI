@@ -26,21 +26,21 @@ export class LoginService {
     }
   }
 
-  isStudent(){
-    if((new JwtHelperService().decodeToken(localStorage.getItem('token')).role == 'STUDENT')){
+  isStudent(): boolean {
+    if ((new JwtHelperService().decodeToken(localStorage.getItem('token')).role == 'STUDENT')) {
       return true;
     }
     return false;
   }
 
-  isTeacher(){
-    if((new JwtHelperService().decodeToken(localStorage.getItem('token')).role == 'TEACHER')){
+  isTeacher(): boolean {
+    if ((new JwtHelperService().decodeToken(localStorage.getItem('token')).role == 'TEACHER')) {
       return true;
     }
     return false;
   }
 
-  getStudentId(){
+  getStudentId(): string {
     return new JwtHelperService().decodeToken(localStorage.getItem('token')).sub;
   }
 
@@ -49,8 +49,8 @@ export class LoginService {
     this._router.navigate(['/login']);
   }
 
-  getUserName(){
-    if (localStorage.getItem('token')){
+  getUserName(): string {
+    if (localStorage.getItem('token')) {
       return new JwtHelperService().decodeToken(localStorage.getItem('token')).name;
     }
   }

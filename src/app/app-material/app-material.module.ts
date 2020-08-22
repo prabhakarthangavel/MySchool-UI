@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatSelectModule, MatProgressSpinnerModule,
 MatCardModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule, MatDatepickerModule, 
-MatNativeDateModule, MatAutocompleteModule } from '@angular/material';
+MatNativeDateModule, MatAutocompleteModule, MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [],
@@ -22,7 +22,8 @@ MatNativeDateModule, MatAutocompleteModule } from '@angular/material';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTabsModule
   ],
   exports: [
     MatIconModule,
@@ -39,7 +40,8 @@ MatNativeDateModule, MatAutocompleteModule } from '@angular/material';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTabsModule
   ]
 })
 export class AppMaterialModule { }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Message } from '../Models/Message.interface';
 import { Response } from '../Constants/Response.const';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-messages',
@@ -17,6 +18,8 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public msgStudent: boolean;
   public msgClass: boolean;
   public searchResult = []
+  public classMessage = [];
+  public studentMessage = [];
   public messageForm: FormGroup = this.fb.group({
     messageTo: ['', Validators.required],
     studentId: [''],
@@ -26,19 +29,32 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public messageTypes = ['Student', 'Class'];
   public allClass = [];
   public descriptionLength: number = 0;
-  public spinner: boolean; 
+  public spinner: boolean;
   public required: boolean;
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) { }
-
-  ngOnInit() {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Messages");
-    this.subscription = this._service.getClasses().subscribe(
-      response => {
-        if (response.status == 200) {
-          this.allClass = response.body;
-        }
-      });
+  }
+
+  ngOnInit() {
+    if (this._loginService.isTeacher()) {
+      this.subscription = this._service.getClasses().subscribe(
+        response => {
+          if (response.status == 200) {
+            this.allClass = response.body;
+          }
+        });
+    }
+    if (this._loginService.isStudent()) {
+      this._service.getMessageClass(this._loginService.getStudentId()).subscribe(
+        response => {
+          console.log("response", response);
+          if (response.body && response.status == 200) {
+            this.classMessage = response.body;
+          }
+        });
+      
+    }
   }
 
   get messageTo() {
@@ -83,21 +99,22 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   submit() {
     this.required = false;
-    let id = this.messageForm.value.studentId;
+    let id;
+    if (this.messageForm.value.studentId != null) {
+      let split = this.messageForm.value.studentId.split(' - ');
+      id = split[0];
+    }
     let clas = this.messageForm.value.class;
     if (id == "" && clas == "") {
       this.required = true;
     } else {
-      if (id == "") {
-        id = 0
-      } else if (clas == "") {
-        clas = 0
-      }
       this.spinner = true;
       let message: Message = {
-        studentId: id,
+        student_id: id,
         clas: clas,
-        message: this.messageForm.value.message
+        message: this.messageForm.value.message,
+        created_on: new Date(),
+        created_by: this._loginService.getUserName()
       }
       this.subscription = this._service.setMessages(message).subscribe(
         response => {
@@ -107,7 +124,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
               duration: 5000,
               verticalPosition: 'bottom'
             });
-            if(response.body.status == Response.Message){
+            if (response.body.status == Response.Message) {
               this.messageForm.reset();
             }
           }
@@ -121,7 +138,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.subscription && !this.subscription.closed){
+    if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
   }
