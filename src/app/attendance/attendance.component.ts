@@ -31,7 +31,7 @@ export class AttendanceComponent implements OnInit {
   });
   public allMonths = [{ 'month': 'January' }, { 'month': 'February' }, { 'month': 'March' }, { 'month': 'April' }, { 'month': 'May' }, { 'month': 'June' }, { 'month': 'July' }, { 'month': 'August' }, { 'month': 'September' }, { 'month': 'October' }, { 'month': 'November' }, { 'month': 'December' }];
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, public _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Attendance");
   }
@@ -80,6 +80,7 @@ export class AttendanceComponent implements OnInit {
           }
         });
     }
+    this.searchResult = Array.from(new Set(this.searchResult));
   }
 
   submit() {

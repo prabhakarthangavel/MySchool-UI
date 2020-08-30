@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     user_id: [''],
     password: ['']
   });
-  constructor(private fb: FormBuilder, private _loginService: LoginService, private _snackBar: MatSnackBar, private _router: Router) {
+  constructor(private fb: FormBuilder, public _loginService: LoginService, private _snackBar: MatSnackBar, private _router: Router) {
   }
 
   ngOnInit() {

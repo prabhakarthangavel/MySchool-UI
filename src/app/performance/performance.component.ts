@@ -49,7 +49,7 @@ export class PerformanceComponent implements OnInit, OnDestroy {
     computer: ['']
   });
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, public _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Performance");
   }
@@ -94,11 +94,13 @@ export class PerformanceComponent implements OnInit, OnDestroy {
   }
 
   valueEnter(value) {
+    console.log(value);
     this.notFound = false;
     this.buttonDisable = false;
     this.searchResult = [];
     if (value.length >= 3) {
-      this.subscription = this._service.getStudents(value).subscribe(
+      let id = value.split(' - ');
+      this.subscription = this._service.getStudents(id[0]).subscribe(
         response => {
           if (response.status == 200 && response.body.length >= 1) {
             for (let i = 0; i < response.body.length; i++) {
@@ -135,8 +137,9 @@ export class PerformanceComponent implements OnInit, OnDestroy {
     let chemistry = this.performanceForm.value.chemistry;
     let biology = this.performanceForm.value.biology;
     let computer = this.performanceForm.value.computer;
+    let id = this.performanceForm.value.studentId.split(' - ');
     let subjects: Performance = {
-      student_id: this.performanceForm.value.studentId,
+      student_id: id[0],
       exam: this.performanceForm.value.exam.toLowerCase(),
       tamil: tamil,
       english: english,
@@ -150,7 +153,6 @@ export class PerformanceComponent implements OnInit, OnDestroy {
       year: new Date().getFullYear()
     }
     for (let i = 0; i < this.subList.length; i++) {
-      console.log(this.subList[i])
       if (this.subList[i] == 'tamil' && (tamil == "" || tamil > 100 || tamil < 0 || !/^\d+$/.test(tamil))) {
         this.error = true;
       } else if (this.subList[i] == 'english' && (english == "" || english > 100 || english < 0 || !/^\d+$/.test(tamil))) {

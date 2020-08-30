@@ -13,7 +13,7 @@
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <mat-nav-list (click)="snav.toggle()">
-        <a mat-list-item>{{_loginService.getUserName() | titlecase}}</a>
+        <a mat-list-item routerLint="/profile">{{_loginService.getUserName() | titlecase}}</a>
         <a mat-list-item routerLink="/landing">Home</a>
         <a mat-list-item (click)="_loginService.logout()">LogOut</a>
       </mat-nav-list>

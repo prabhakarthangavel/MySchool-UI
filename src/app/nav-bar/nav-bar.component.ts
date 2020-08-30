@@ -14,7 +14,7 @@ export class NavBarComponent implements OnInit, OnDestroy, AfterContentChecked {
   public _mobileQueryListener: () => void;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher,
-    public _navBar: NavBarService, private ref: ChangeDetectorRef, private _location: Location, private _loginService: LoginService) {
+    public _navBar: NavBarService, private ref: ChangeDetectorRef, private _location: Location, public _loginService: LoginService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);

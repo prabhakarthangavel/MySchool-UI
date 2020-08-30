@@ -31,7 +31,7 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
   public date: string;
   public dateInvalid: boolean;
   public descriptionLength: number = 0;
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, public _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Assignments");
     // this.assignmentForm.get('description').valueChanges.subscribe(

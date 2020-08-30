@@ -18,59 +18,59 @@ export class CommonService {
   constructor(private _http: HttpClient) { }
 
   setAttendance(attendance): Observable<any> {
-    return this._http.post<any>(MOCK.SET_ATTENDANCE, attendance, { observe: 'response' });
+    return this._http.post<any>(API.SET_ATTENDANCE, attendance, { observe: 'response' });
   }
 
   getClasses(): Observable<any> {
-    return this._http.get<any>(MOCK.GET_CLASSES, { observe: 'response' });
+    return this._http.get<any>(API.GET_CLASSES, { observe: 'response' });
   }
 
   getSection(classes): Observable<any> {
-    return this._http.get<any>(MOCK.GET_SECTION + '/' + classes, { observe: 'response' })
+    return this._http.get<any>(API.GET_SECTION + '/' + classes, { observe: 'response' })
   }
 
   setAssignments(assignment): Observable<any> {
-    return this._http.post<any>(MOCK.SET_ASSIGNMENT, assignment, { observe: 'response' });
+    return this._http.post<any>(API.SET_ASSIGNMENT, assignment, { observe: 'response' });
   }
 
   setMessages(message: Message): Observable<any> {
-    return this._http.post<any>(MOCK.SET_MESSAGES, message, { observe: 'response' });
+    return this._http.post<any>(API.SET_MESSAGES, message, { observe: 'response' });
   }
 
   getStudents(studentId): Observable<any> {
-    return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response' });
+    return this._http.get<any>(API.GET_STUDENTS + '/' + studentId, { observe: 'response' });
   }
 
   setPerformance(performance: Performance): Observable<any> {
-    return this._http.post<any>(MOCK.SET_PERFORMANCE, performance, { observe: 'response' })
+    return this._http.post<any>(API.SET_PERFORMANCE, performance, { observe: 'response' })
   }
 
   setHoliday(holiday): Observable<any> {
-    return this._http.post<any>(MOCK.SET_HOLIDAY, holiday, { observe: 'response' });
+    return this._http.post<any>(API.SET_HOLIDAY, holiday, { observe: 'response' });
   }
 
   getAttendance(student_id): Observable<HttpResponse<Attendance[]>> {
-    return this._http.get<Attendance[]>(MOCK.GET_ATTENDANCE + '/' + student_id, { observe: 'response' });
+    return this._http.get<Attendance[]>(API.GET_ATTENDANCE + '/' + student_id, { observe: 'response' });
   }
 
   getAssignments(student_id): Observable<HttpResponse<Assignments[]>> {
-    return this._http.get<Assignments[]>(MOCK.GET_ASSIGNMENTS + '/' + student_id, { observe: 'response' });
+    return this._http.get<Assignments[]>(API.GET_ASSIGNMENTS + '/' + student_id, { observe: 'response' });
   }
 
   getMessageClass(student_id): Observable<any> {
-    return this._http.get<any>(MOCK.GET_STUDENT_CLASS + '/' + student_id, { observe: 'response' }).pipe(
-      flatMap(clas => this._http.get<any>(MOCK.GET_MESSAGE_CLASS + '/' + clas.body, { observe: 'response' })));
+    return this._http.get<any>(API.GET_STUDENT_CLASS + '/' + student_id, { observe: 'response' }).pipe(
+      flatMap(clas => this._http.get<any>(API.GET_MESSAGE_CLASS + '/' + clas.body, { observe: 'response' })));
   }
 
   getMessageById(student_id): Observable<any> {
-    return this._http.get<any>(MOCK.GET_MESSAGE_BYID + '/' + student_id, { observe: 'response' });
+    return this._http.get<any>(API.GET_MESSAGE_BYID + '/' + student_id, { observe: 'response' });
   }
 
   getHolidayList(): Observable<any> {
-    return this._http.get<Holiday>(MOCK.GET_HOLIDAYS, { observe: 'response' });
+    return this._http.get<Holiday>(API.GET_HOLIDAYS, { observe: 'response' });
   }
 
   getPerformances(student_id): Observable<HttpResponse<Performance[]>> {
-    return this._http.get<Performance[]>(MOCK.GET_PERFORMANCES + '/' + student_id, { observe: 'response' });
+    return this._http.get<Performance[]>(API.GET_PERFORMANCES + '/' + student_id, { observe: 'response' });
   }
 }

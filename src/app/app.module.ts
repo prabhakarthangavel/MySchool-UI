@@ -23,6 +23,8 @@ import { HolidayComponent } from './holiday/holiday.component';
 import { InterceptorService } from './Shared/Interceptor.service';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ParentNoteComponent } from './parent-note/parent-note.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
     PerformanceComponent,
     HolidayComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ProfileComponent,
+    ParentNoteComponent
   ],
   imports: [
     BrowserModule,

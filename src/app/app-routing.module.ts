@@ -8,6 +8,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { PerformanceComponent } from './performance/performance.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { AuthGuardService } from './activates/auth-guard.service';
+import { ParentNoteComponent } from './parent-note/parent-note.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'landing', component: LandingComponent, canActivate: [AuthGuardService] },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuardService] },
   { path: 'performance', component: PerformanceComponent, canActivate: [AuthGuardService] },
   { path: 'holiday', component: HolidayComponent, canActivate: [AuthGuardService] },
+  { path: 'parent_note', component: ParentNoteComponent, canActivate: [AuthGuardService] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
 ];

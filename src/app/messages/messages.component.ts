@@ -31,7 +31,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   public descriptionLength: number = 0;
   public spinner: boolean;
   public required: boolean;
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, public _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Messages");
   }
@@ -103,6 +103,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
           }
         });
     }
+    this.searchResult = Array.from(new Set(this.searchResult));
   }
 
   submit() {

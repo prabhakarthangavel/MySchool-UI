@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   public welcome: string;
 
   constructor(private _router: Router,
-    private _navBar: NavBarService, private _loginService: LoginService) {
+    private _navBar: NavBarService, public _loginService: LoginService) {
     this._navBar.setShow();
     this._navBar.title = "St Joseph School";
   }

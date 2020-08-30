@@ -21,7 +21,7 @@ export class HolidayComponent implements OnInit, OnDestroy {
     holidays: this.fb.array([this.initItems()])
   });
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, public _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Holiday Calendar");
   }
@@ -67,6 +67,9 @@ export class HolidayComponent implements OnInit, OnDestroy {
           });
           if (response.body.status == Response.Saved) {
             this.holidayForm.reset();
+            while(this.formArray.length != 0){
+              this.formArray.removeAt(0);
+            }
           }
         }
       });

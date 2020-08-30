@@ -4,13 +4,14 @@
     display: flex;
     justify-content: center;
     margin-top: -57px;
+    position: fixed;
 }
 .form{
     margin: 3% 3% 0 3%;
 }
 
 .image{
-    margin: 0 25% 10% 25% !important;
+    margin: 0 25% 0 25% !important;
     max-width: 50%;
     max-height: 50%;
     border-radius: 35%;
@@ -19,7 +20,7 @@
 .login{
     margin: 0;
     background: white;
-    height: 70vh;
+    height: 80vh;
     border-radius: 1.5rem;
     width: 80%;
     margin: 20% 8% 0 8%;
