@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Performance } from '../Models/Performance.interface';
 import { Response } from '../Constants/Response.const';
+import { LoginService } from '../login/login.service';
+
 
 @Component({
   selector: 'app-performance',
@@ -13,14 +15,25 @@ import { Response } from '../Constants/Response.const';
   styleUrls: ['./performance.component.scss']
 })
 export class PerformanceComponent implements OnInit, OnDestroy {
+  public displayedColumns: string[] = ['exam', 'tamil', 'english', 'maths', 'science', 'social', 'total'];
+  public dataSource: Performance[] = [];
   public subscription: Subscription;
   public examList = ['Term 1', 'Quearterly', 'Term 2', 'Halfyearly', 'Term 3', 'Final Exam'];
   public subList = [];
   public searchResult = [];
+  public totalMarks: number;
+  public average = [];
   public notFound: boolean;
   public error: boolean;
   public buttonDisable: boolean;
   public required: boolean;
+  public json = [];
+  public t1: number;
+  public qy: number;
+  public t2: number;
+  public hy: number;
+  public t3: number;
+  public ft: number;
   public spinner: boolean;
   public performanceForm: FormGroup = this.fb.group({
     studentId: ['', Validators.required],
@@ -36,11 +49,36 @@ export class PerformanceComponent implements OnInit, OnDestroy {
     computer: ['']
   });
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) { }
-
-  ngOnInit() {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Performance");
+  }
+
+  ngOnInit() {
+    if (this._loginService.isStudent()) {
+      this.subscription = this._service.getPerformances(this._loginService.getStudentId()).subscribe(
+        response => {
+          if (response.status == 200) {
+            this.dataSource = response.body;
+            this.average.push('Avg');
+            for (let i = 0; i < this.dataSource.length; i++) {
+              if (this.dataSource[i].exam.toLocaleLowerCase() == 't1') {
+                this.t1 = this.dataSource[i].total;
+              } else if (this.dataSource[i].exam.toLocaleLowerCase() == 'qy') {
+                this.qy = this.dataSource[i].total;
+              } else if (this.dataSource[i].exam.toLocaleLowerCase() == 't2') {
+                this.t2 = this.dataSource[i].total;
+              } else if (this.dataSource[i].exam.toLocaleLowerCase() == 'hy') {
+                this.hy = this.dataSource[i].total;
+              } else if (this.dataSource[i].exam.toLocaleLowerCase() == 't3') {
+                this.t3 = this.dataSource[i].total;
+              } else if (this.dataSource[i].exam.toLocaleLowerCase() == 'ft') {
+                this.ft = this.dataSource[i].total;
+              }
+            }
+          }
+        });
+    }
   }
 
   // addSubjects(subject){
@@ -90,7 +128,7 @@ export class PerformanceComponent implements OnInit, OnDestroy {
     this.error = false;
     let tamil = this.performanceForm.value.tamil;
     let english = this.performanceForm.value.english;
-    let maths = this.performanceForm.value.math;
+    let maths = this.performanceForm.value.maths;
     let social = this.performanceForm.value.social;
     let science = this.performanceForm.value.science;
     let physics = this.performanceForm.value.physics;
@@ -112,6 +150,7 @@ export class PerformanceComponent implements OnInit, OnDestroy {
       year: new Date().getFullYear()
     }
     for (let i = 0; i < this.subList.length; i++) {
+      console.log(this.subList[i])
       if (this.subList[i] == 'tamil' && (tamil == "" || tamil > 100 || tamil < 0 || !/^\d+$/.test(tamil))) {
         this.error = true;
       } else if (this.subList[i] == 'english' && (english == "" || english > 100 || english < 0 || !/^\d+$/.test(tamil))) {
@@ -132,9 +171,9 @@ export class PerformanceComponent implements OnInit, OnDestroy {
         this.error = true;
       }
     }
-    this.spinner = true;
     this.required = false;
     if (!this.error) {
+      this.spinner = true;
       this.subscription = this._service.setPerformance(subjects).subscribe(
         response => {
           this.spinner = false;
@@ -149,8 +188,15 @@ export class PerformanceComponent implements OnInit, OnDestroy {
             }
           }
         });
+    } else {
+      this._snackBar.open("Marks Should not be null, non negative, not greater than 100 and should contain only numbers", "Close", {
+        duration: 5000,
+        verticalPosition: 'bottom'
+      });
     }
   }
+
+
 
   ngOnDestroy() {
     if (this.subscription && !this.subscription.closed) {

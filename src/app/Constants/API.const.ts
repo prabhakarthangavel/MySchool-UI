@@ -13,5 +13,8 @@ export const API = {
     GET_ATTENDANCE: "https://firstschoolapp.herokuapp.com/student/getAttendance",
     GET_ASSIGNMENTS: "https://firstschoolapp.herokuapp.com/student/getAssignments",
     GET_MESSAGE_CLASS: "https://firstschoolapp.herokuapp.com/student/getMessageClass",
-    GET_STUDENT_CLASS: "https://firstschoolapp.herokuapp.com/student/getClass"
+    GET_STUDENT_CLASS: "https://firstschoolapp.herokuapp.com/student/getClass",
+    GET_MESSAGE_BYID: "https://firstschoolapp.herokuapp.com/student/getMessageById",
+    GET_HOLIDAYS: "https://firstschoolapp.herokuapp.com/student/getHolidays",
+    GET_PERFORMANCES: "https://firstschoolapp.herokuapp.com/student/getPerfomances"
 }

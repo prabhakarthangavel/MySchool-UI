@@ -38,9 +38,11 @@ export class AttendanceComponent implements OnInit {
 
   ngOnInit() {
     if (this._loginService.isStudent()) {
+      this.spinner = true;
       let studentId = this._loginService.getStudentId();
       this.subscription = this._service.getAttendance(studentId).subscribe(
         response => {
+          this.spinner = false;
           this.dataSource = response.body;
           for (let i = 0; i < this.dataSource.length; i++) {
             this.totalPresent = this.totalPresent + this.dataSource[i].present;

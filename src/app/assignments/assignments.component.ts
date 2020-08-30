@@ -51,9 +51,11 @@ export class AssignmentsComponent implements OnInit, OnDestroy {
         });
     }
     if (this._loginService.isStudent()) {
+      this.spinner = true;
       let studentId = this._loginService.getStudentId();
       this.subscription = this._service.getAssignments(studentId).subscribe(
         response => {
+          this.spinner = false;
           if (response.status == 200) {
             for (let i = 0; i < response.body.length; i++) {
               if (new Date(response.body[i].dueDate).getTime() >= new Date().getTime()) {

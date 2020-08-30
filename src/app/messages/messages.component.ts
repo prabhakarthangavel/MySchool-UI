@@ -46,14 +46,22 @@ export class MessagesComponent implements OnInit, OnDestroy {
         });
     }
     if (this._loginService.isStudent()) {
-      this._service.getMessageClass(this._loginService.getStudentId()).subscribe(
+      this.spinner = true;
+      let student_id = this._loginService.getStudentId();
+      this.subscription = this._service.getMessageClass(student_id).subscribe(
         response => {
-          console.log("response", response);
+          this.spinner = false;
           if (response.body && response.status == 200) {
             this.classMessage = response.body;
           }
         });
-      
+      this.subscription = this._service.getMessageById(student_id).subscribe(
+        response => {
+          if (response.body && response.status == 200) {
+            this.studentMessage = response.body;
+          }
+        }
+      )
     }
   }
 

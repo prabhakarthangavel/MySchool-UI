@@ -7,8 +7,9 @@ import { Message } from '../Models/Message.interface';
 import { Performance } from '../Models/Performance.interface';
 import { Attendance } from '../Models/Attendace.interface';
 import { Assignments } from '../Models/Assigments.interface';
-import { mergeMap, map, flatMap } from 'rxjs/operators';
+import { Holiday } from '../Models/Holiday.interface';
 
+import { flatMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,7 @@ export class CommonService {
     return this._http.post<any>(MOCK.SET_MESSAGES, message, { observe: 'response' });
   }
 
-  getStudents(studentId: number): Observable<any> {
+  getStudents(studentId): Observable<any> {
     return this._http.get<any>(MOCK.GET_STUDENTS + '/' + studentId, { observe: 'response' });
   }
 
@@ -59,5 +60,17 @@ export class CommonService {
   getMessageClass(student_id): Observable<any> {
     return this._http.get<any>(MOCK.GET_STUDENT_CLASS + '/' + student_id, { observe: 'response' }).pipe(
       flatMap(clas => this._http.get<any>(MOCK.GET_MESSAGE_CLASS + '/' + clas.body, { observe: 'response' })));
+  }
+
+  getMessageById(student_id): Observable<any> {
+    return this._http.get<any>(MOCK.GET_MESSAGE_BYID + '/' + student_id, { observe: 'response' });
+  }
+
+  getHolidayList(): Observable<any> {
+    return this._http.get<Holiday>(MOCK.GET_HOLIDAYS, { observe: 'response' });
+  }
+
+  getPerformances(student_id): Observable<HttpResponse<Performance[]>> {
+    return this._http.get<Performance[]>(MOCK.GET_PERFORMANCES + '/' + student_id, { observe: 'response' });
   }
 }

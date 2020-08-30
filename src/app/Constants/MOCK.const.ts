@@ -13,5 +13,8 @@ export const MOCK = {
     GET_ATTENDANCE: "http://localhost:8080/student/getAttendance",
     GET_ASSIGNMENTS: "http://localhost:8080/student/getAssignments",
     GET_MESSAGE_CLASS: "http://localhost:8080/student/getMessageClass",
-    GET_STUDENT_CLASS: "http://localhost:8080/student/getClass"
+    GET_STUDENT_CLASS: "http://localhost:8080/student/getClass",
+    GET_MESSAGE_BYID: "http://localhost:8080/student/getMessageById",
+    GET_HOLIDAYS: "http://localhost:8080/student/getHolidays",
+    GET_PERFORMANCES: "http://localhost:8080/student/getPerfomances"
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavBarService } from '../nav-bar/nav-bar.service';
-import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../Shared/common.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Response } from '../Constants/Response.const';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-holiday',
@@ -14,11 +15,13 @@ import { Response } from '../Constants/Response.const';
 export class HolidayComponent implements OnInit, OnDestroy {
   public subscription: Subscription;
   public spinner: boolean;
+  public dataSource = [];
+  public displayedColumns = ['holiday', 'event'];
   public holidayForm: FormGroup = this.fb.group({
     holidays: this.fb.array([this.initItems()])
   });
 
-  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar) {
+  constructor(public _navBar: NavBarService, private fb: FormBuilder, private _service: CommonService, private _snackBar: MatSnackBar, private _loginService: LoginService) {
     this._navBar.setHide();
     this._navBar.setTitle("Holiday Calendar");
   }
@@ -43,7 +46,6 @@ export class HolidayComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    console.log("value", this.holidayForm.value.holidays[0].holidayDate);
     let holiday = [];
     let event = [];
     for (let i = 0; i < this.holidayForm.value.holidays.length; i++) {
@@ -63,7 +65,7 @@ export class HolidayComponent implements OnInit, OnDestroy {
             duration: 5000,
             verticalPosition: 'bottom'
           });
-          if(response.body.status == Response.Saved){
+          if (response.body.status == Response.Saved) {
             this.holidayForm.reset();
           }
         }
@@ -71,6 +73,16 @@ export class HolidayComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this._loginService.isStudent()) {
+      this.spinner = true;
+      this.subscription = this._service.getHolidayList().subscribe(
+        response => {
+          this.spinner = false;
+          if(response.status == 200){
+            this.dataSource = response.body;
+          }
+        });
+    }
   }
 
   ngOnDestroy() {
